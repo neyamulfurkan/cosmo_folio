@@ -1,0 +1,276 @@
+/* ============================================================
+   FILE 047: src/components/sections/Blog/Blog.module.css
+   Blog section — filterable grid of published post cards.
+   ============================================================ */
+
+/* ── Section wrapper ──────────────────────────────────────── */
+.blogContainer {
+  padding: var(--space-6);
+}
+
+/* ── Category filter row ──────────────────────────────────── */
+.filterRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.filterTag {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: var(--text-xs);
+  font-family: var(--font-body);
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) var(--easing-smooth),
+    border-color var(--duration-fast) var(--easing-smooth),
+    color var(--duration-fast) var(--easing-smooth);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.filterTag:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.filterTagActive {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: var(--color-white);
+}
+
+.filterTagActive:hover {
+  background: var(--accent-primary);
+  color: var(--color-white);
+}
+
+/* ── Blog grid ────────────────────────────────────────────── */
+.blogGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+@media (max-width: 768px) {
+  .blogGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Blog card ────────────────────────────────────────────── */
+.blogCard {
+  cursor: pointer;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  transition: transform var(--duration-normal) var(--easing-smooth),
+              box-shadow var(--duration-normal) var(--easing-smooth);
+}
+
+.blogCard:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+/* ── Cover image ──────────────────────────────────────────── */
+.coverImg {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--duration-slow) var(--easing-smooth);
+}
+
+.blogCard:hover .coverImg {
+  transform: scale(1.04);
+}
+
+.coverPlaceholder {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.04);
+  font-size: var(--text-2xl);
+  color: rgba(255, 255, 255, 0.15);
+}
+
+/* ── Card body ────────────────────────────────────────────── */
+.cardBody {
+  padding: var(--space-4);
+}
+
+/* ── Category tag ─────────────────────────────────────────── */
+.categoryTag {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: var(--font-body);
+}
+
+/* ── Meta row (reading time + date) ──────────────────────── */
+.meta {
+  display: flex;
+  gap: var(--space-3);
+  font-size: var(--text-xs);
+  color: rgba(255, 255, 255, 0.5);
+  margin: var(--space-1) 0 var(--space-2);
+  align-items: center;
+}
+
+.metaDot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
+}
+
+/* ── Card title ───────────────────────────────────────────── */
+.cardTitle {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-white);
+  margin: var(--space-2) 0 var(--space-1);
+  line-height: 1.4;
+  font-family: var(--font-display);
+}
+
+/* ── Excerpt ──────────────────────────────────────────────── */
+.excerpt {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Tag row ──────────────────────────────────────────────── */
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-top: var(--space-3);
+}
+
+.tag {
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 2px var(--space-2);
+  border-radius: 4px;
+}
+
+/* ── Empty state ──────────────────────────────────────────── */
+.emptyState {
+  color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+  padding: var(--space-10);
+  grid-column: 1 / -1;
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+.emptyStateIcon {
+  font-size: var(--text-3xl);
+  display: block;
+  margin-bottom: var(--space-3);
+  opacity: 0.5;
+}
+
+/* ── Skeleton loading states ──────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+
+.skeletonCard {
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+}
+
+.skeletonMedia {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.04) 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+.skeletonBody {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.skeletonLine {
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.04) 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+.skeletonLineShort {
+  width: 40%;
+}
+
+.skeletonLineMid {
+  width: 65%;
+}
+
+/* ── Mobile overrides ─────────────────────────────────────── */
+@media (max-width: 768px) {
+  .blogContainer {
+    padding: var(--space-4);
+  }
+
+  .cardTitle {
+    font-size: var(--text-base);
+  }
+}
+
+/* ── Reduced motion ───────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .blogCard {
+    transition: none;
+  }
+
+  .coverImg {
+    transition: none;
+  }
+
+  .skeletonMedia,
+  .skeletonLine {
+    animation: none;
+  }
+}

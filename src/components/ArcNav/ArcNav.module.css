@@ -1,0 +1,382 @@
+/* ============================================================
+   FILE 023: src/components/ArcNav/ArcNav.module.css
+   ============================================================ */
+
+@keyframes arcIconGlowPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 2px var(--arc-glow),
+      0 0 12px 4px var(--arc-glow),
+      0 0 24px 8px var(--particle-glow);
+  }
+  50% {
+    box-shadow:
+      0 0 0 2px var(--arc-glow),
+      0 0 20px 8px var(--arc-glow),
+      0 0 40px 16px var(--particle-glow);
+  }
+}
+
+/* ----------------------------------------------------------
+   CONTAINER — full viewport, pointer-events: none by default
+   ---------------------------------------------------------- */
+.arcContainer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--z-controls);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 500ms var(--easing-decelerate),
+              transform 500ms var(--easing-decelerate);
+  will-change: opacity, transform;
+  touch-action: none;
+}
+
+.arcContainerVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.arcContainerDetail {
+  opacity: 0.35;
+  pointer-events: none !important;
+  transform: scale(0.85) translateY(10px);
+}
+
+/* ----------------------------------------------------------
+   DRAG ZONE — full-width bottom strip
+   ---------------------------------------------------------- */
+.dragZone {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  pointer-events: auto;
+  cursor: grab;
+  z-index: 1;
+  background: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  -webkit-touch-callout: none;
+}
+
+.dragZone:active {
+  cursor: grabbing;
+}
+
+.dragZone[data-precise] {
+  cursor: crosshair;
+}
+
+/* ----------------------------------------------------------
+   NAV BUTTONS — centered bottom, flanking the dots
+   Both buttons sit in a flex row centered at the bottom.
+   We use a wrapper div rendered in JSX for true centering.
+   ---------------------------------------------------------- */
+.navControls {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  pointer-events: auto;
+  z-index: 2;
+}
+
+.navBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: rgba(255, 255, 255, 0.22);
+  font-size: 28px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 2px;
+  cursor: pointer;
+  opacity: 0.45;
+  transition:
+    background   150ms ease,
+    border-color 150ms ease,
+    color        150ms ease,
+    transform    150ms ease,
+    opacity      150ms ease;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.navBtn:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.7);
+  opacity: 0.85;
+  transform: scale(1.08);
+}
+
+.navBtn:active {
+  transform: scale(0.88);
+  opacity: 1;
+}
+
+.navBtnDisabled {
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+/* ----------------------------------------------------------
+   DOT INDICATORS — between the two nav buttons
+   ---------------------------------------------------------- */
+.dots {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  opacity: 0.4;
+  transition: background 150ms ease, width 200ms ease, border-radius 200ms ease, opacity 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dot:hover {
+  background: rgba(255, 255, 255, 0.35);
+  opacity: 0.7;
+}
+
+.dotActive {
+  width: 14px;
+  border-radius: 2px;
+  background: var(--accent-primary);
+  opacity: 0.55;
+  box-shadow: none;
+}
+
+/* ----------------------------------------------------------
+   ARC ICON
+   ---------------------------------------------------------- */
+.arcIcon {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  pointer-events: auto;
+  cursor: pointer;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  width: 52px;
+  height: 52px;
+  transition:
+    background  150ms ease,
+    border-color 150ms ease,
+    box-shadow   200ms ease;
+  user-select: none;
+  z-index: 2;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.arcIcon:hover {
+  background: rgba(255, 255, 255, 0.11);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.arcIcon:active {
+  transform: scale(0.9) !important;
+}
+
+.arcIconActive {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--arc-glow);
+  box-shadow:
+    0 0 0 2px var(--arc-glow),
+    0 0 14px 4px var(--arc-glow),
+    0 0 28px 8px var(--particle-glow);
+  animation: arcIconGlowPulse 3s ease-in-out infinite;
+}
+
+.arcIconEmoji {
+  display: block;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.arcIconLabel {
+  font-size: 10px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  pointer-events: none;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 150ms ease, opacity 150ms ease;
+}
+
+.arcIconActive .arcIconLabel {
+  max-height: 18px;
+  opacity: 1;
+}
+
+/* ----------------------------------------------------------
+   DOCK LAYOUT
+   ---------------------------------------------------------- */
+.dockContainer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 16px 8px;
+  pointer-events: none;
+  z-index: var(--z-controls);
+  opacity: 1;
+  transform: translateY(0);
+  overflow-x: auto;
+  background: linear-gradient(transparent, rgba(0,0,0,0.35));
+}
+
+/* ── UNIVERSAL NAV ICON — dock, scattered (desktop), orbital (desktop) ── */
+.dockIcon {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 8px;
+  min-width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+  color: rgba(255, 255, 255, 0.60);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.dockIcon:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.90);
+}
+
+.dockIcon:active {
+  transform: scale(0.92);
+}
+
+.dockIconActive {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--arc-glow);
+  color: white;
+  box-shadow:
+    0 0 0 2px var(--arc-glow),
+    0 0 14px 4px var(--arc-glow),
+    0 0 28px 8px var(--particle-glow);
+  animation: arcIconGlowPulse 3s ease-in-out infinite;
+}
+
+.dockIconEmoji {
+  font-size: 20px;
+  line-height: 1;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+.dockIconLabel {
+  font-size: 9px;
+  font-family: var(--font-body);
+  white-space: nowrap;
+  color: inherit;
+  letter-spacing: 0.01em;
+  pointer-events: none;
+}
+
+/* ----------------------------------------------------------
+   SCATTERED LAYOUT — desktop
+   Reuses universal dockIcon token. The composes keyword tells
+   CSS Modules to merge the class names at runtime.
+   ---------------------------------------------------------- */
+.scatteredIcon {
+  composes: dockIcon;
+}
+
+/* ----------------------------------------------------------
+   ORBITAL LAYOUT — desktop
+   ---------------------------------------------------------- */
+.orbitalIcon {
+  composes: dockIcon;
+}
+
+/* ----------------------------------------------------------
+   ORBITAL ICON MOBILE — same universal token
+   ---------------------------------------------------------- */
+.orbitalIconMobile {
+  composes: dockIcon;
+}
+
+.orbitalIconMobileActive {
+  composes: dockIconActive;
+  box-shadow:
+    0 0 0 2px var(--arc-glow),
+    0 0 14px 4px var(--arc-glow),
+    0 0 28px 8px var(--particle-glow);
+  animation: arcIconGlowPulse 3s ease-in-out infinite;
+}
+
+/* ----------------------------------------------------------
+   REDUCED MOTION OVERRIDES
+   ---------------------------------------------------------- */
+
+/* ----------------------------------------------------------
+   MOBILE — arc layout is explicitly rendered by Layer3Controls
+   on mobile, so we must NOT hide arcContainer on small screens.
+   Other layouts (dock/scattered/orbital) are handled by
+   MobileControls which renders independently.
+   ---------------------------------------------------------- */
+
+/* ----------------------------------------------------------
+   REDUCED MOTION
+   ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .arcContainer, .arcIcon, .navBtn, .dot {
+    transition-duration: 0.01ms !important;
+    animation-duration:  0.01ms !important;
+  }
+  .arcIconActive { animation: none; }
+}

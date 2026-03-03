@@ -1,0 +1,98 @@
+/* ============================================================
+   FILE 065: src/components/Loader/Loader.module.css
+   Entrance loader overlay with letter-assembly animation
+   and opacity fade-out transition.
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   LOADER OVERLAY — full-viewport blocking layer
+   ---------------------------------------------------------- */
+.loader {
+  position: fixed;
+  inset: 0;
+  background: var(--world-bg-start);
+  z-index: var(--z-loader);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 400ms ease;
+  pointer-events: auto;
+}
+
+/* Applied via JS after contentLoaded becomes true */
+.loaderHidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ----------------------------------------------------------
+   NAME CONTAINER — horizontal letter row
+   ---------------------------------------------------------- */
+.nameContainer {
+  display: flex;
+  gap: 2px;
+  align-items: baseline;
+}
+
+/* ----------------------------------------------------------
+   NAME LETTER — individually animated character span
+   Starts invisible; letterAssemble keyframe defined in
+   src/styles/global.css plays once per letter with
+   staggered animation-delay set via inline style in TSX.
+   ---------------------------------------------------------- */
+.nameLetter {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 8vw, 80px);
+  font-weight: 700;
+  color: var(--color-white);
+  opacity: 0;
+  display: inline-block;
+  animation: letterAssemble 0.6s var(--easing-spring) forwards;
+}
+
+/* ----------------------------------------------------------
+   SPACE CHARACTER — preserve word gaps between name parts
+   ---------------------------------------------------------- */
+.nameSpace {
+  display: inline-block;
+  width: 0.3em;
+}
+
+/* ----------------------------------------------------------
+   SUBTITLE — optional tagline beneath the name
+   Fades in after the last letter assembles
+   ---------------------------------------------------------- */
+.loaderSubtitle {
+  position: absolute;
+  bottom: calc(50% - clamp(48px, 8vw, 80px) - 32px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeIn 0.4s var(--easing-decelerate) forwards;
+  animation-delay: 1.2s;
+  white-space: nowrap;
+}
+
+/* ----------------------------------------------------------
+   REDUCED MOTION — collapse all animation to a single fade
+   ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .loader {
+    transition-duration: 0.01ms;
+  }
+
+  .nameLetter {
+    opacity: 1;
+    animation-duration: 0.01ms;
+  }
+
+  .loaderSubtitle {
+    opacity: 1;
+    animation-duration: 0.01ms;
+  }
+}

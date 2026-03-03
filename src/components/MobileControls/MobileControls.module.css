@@ -1,0 +1,768 @@
+/* ============================================================
+   FILE 067: src/components/MobileControls/MobileControls.module.css
+   Mobile bottom dock, gear button, bottom sheet overlay,
+   and sheet options grid.
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   BOTTOM DOCK — horizontal scrollable section nav
+   ---------------------------------------------------------- */
+.bottomDock {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 8px 20px;
+  overflow-x: auto;
+  display: flex;
+  gap: 8px;
+  -webkit-overflow-scrolling: touch;
+  z-index: var(--z-controls);
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
+  scrollbar-width: none;
+  pointer-events: auto;
+}
+
+.bottomDock::-webkit-scrollbar {
+  display: none;
+}
+
+/* ----------------------------------------------------------
+   DOCK ICON — individual section pill
+   ---------------------------------------------------------- */
+.dockIcon {
+  flex-shrink: 0;
+  min-width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--easing-smooth);
+  padding: 0 8px;
+  border: 1px solid transparent;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dockIcon:active {
+  transform: scale(0.92);
+}
+
+.dockIconActive {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 12px rgba(123, 92, 240, 0.25);
+}
+
+.dockIconEmoji {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.dockIconLabel {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+  font-family: var(--font-body);
+  letter-spacing: 0.02em;
+}
+
+.dockIconActive .dockIconLabel {
+  color: var(--accent-primary);
+}
+
+/* ----------------------------------------------------------
+   GEAR BUTTON — single corner control trigger
+   ---------------------------------------------------------- */
+.gearButton {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: var(--z-controls);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+  transition: all var(--duration-fast) var(--easing-smooth);
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.gearButton:active {
+  transform: scale(0.92);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.gearButtonOpen {
+  border-color: var(--accent-primary);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 0 0 12px rgba(123, 92, 240, 0.3);
+}
+
+/* ----------------------------------------------------------
+   BACKDROP — dimmed overlay behind bottom sheet
+   ---------------------------------------------------------- */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: var(--z-overlay);
+  pointer-events: auto;
+  animation: backdropFadeIn var(--duration-normal) var(--easing-smooth) forwards;
+}
+
+@keyframes backdropFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ----------------------------------------------------------
+   BOTTOM SHEET — slide-up controls panel
+   ---------------------------------------------------------- */
+.bottomSheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: calc(var(--z-overlay) + 1);
+  background: rgba(10, 10, 20, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px 20px 0 0;
+  border-top: 1px solid var(--glass-border);
+  border-left: 1px solid var(--glass-border);
+  border-right: 1px solid var(--glass-border);
+  padding: 24px;
+  padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  transform: translateY(100%);
+  transition: transform 400ms var(--easing-smooth);
+  pointer-events: auto;
+}
+
+.bottomSheetOpen {
+  transform: translateY(0);
+}
+
+/* ----------------------------------------------------------
+   SHEET HANDLE — drag indicator bar
+   ---------------------------------------------------------- */
+.sheetHandle {
+  width: 36px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  margin: 0 auto 20px;
+}
+
+/* ----------------------------------------------------------
+   SHEET OPTIONS — 2×2 control grid
+   ---------------------------------------------------------- */
+.sheetOptions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.sheetOption {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  padding: 20px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  font-family: var(--font-body);
+  color: rgba(255, 255, 255, 0.85);
+  transition: background var(--duration-fast) var(--easing-smooth),
+              border-color var(--duration-fast) var(--easing-smooth),
+              transform var(--duration-fast) var(--easing-smooth);
+  -webkit-tap-highlight-color: transparent;
+  min-height: 88px;
+}
+
+.sheetOption:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.sheetOption:active {
+  transform: scale(0.96);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sheetOptionActive {
+  border-color: var(--accent-primary);
+  background: rgba(123, 92, 240, 0.1);
+}
+
+.sheetOptionIcon {
+  font-size: var(--text-2xl);
+  line-height: 1;
+}
+
+.sheetOptionLabel {
+  font-size: var(--text-sm);
+  font-family: var(--font-body);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.sheetOptionSub {
+  font-size: 9px;
+  font-family: var(--font-body);
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.04em;
+  margin-top: -4px;
+}
+
+/* ----------------------------------------------------------
+   SUB-PANEL — nested content within the sheet
+   ---------------------------------------------------------- */
+.subPanel {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--glass-border);
+  animation: subPanelFadeIn var(--duration-normal) var(--easing-decelerate) forwards;
+}
+
+@keyframes subPanelFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.subPanelTitle {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+  font-family: var(--font-body);
+}
+
+.subPanelBack {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-sm);
+  color: var(--accent-secondary);
+  cursor: pointer;
+  margin-bottom: 16px;
+  font-family: var(--font-body);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ----------------------------------------------------------
+   THEME ROW — theme options in sub-panel
+   ---------------------------------------------------------- */
+.themeRow {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+
+.themeRow::-webkit-scrollbar {
+  display: none;
+}
+
+.themeChip {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.themeChipCanvas {
+  width: 64px;
+  height: 44px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: border-color var(--duration-fast) var(--easing-smooth);
+  display: block;
+}
+
+.themeChipActive .themeChipCanvas {
+  border-color: var(--accent-primary);
+}
+
+.themeChipLabel {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--font-body);
+  white-space: nowrap;
+}
+
+.themeChipActive .themeChipLabel {
+  color: var(--accent-primary);
+}
+
+/* ----------------------------------------------------------
+   AMBIENCE ROW — volume and toggle in sub-panel
+   ---------------------------------------------------------- */
+.ambienceRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ambienceToggle {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 22px;
+  transition: all var(--duration-fast) var(--easing-smooth);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ambienceToggleOn {
+  border-color: var(--accent-primary);
+  background: rgba(123, 92, 240, 0.15);
+}
+
+.volumeSliderWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.volumeLabel {
+  font-size: var(--text-xs);
+  color: rgba(255, 255, 255, 0.5);
+  font-family: var(--font-body);
+}
+
+.volumeSlider {
+  width: 100%;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.volumeSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(123, 92, 240, 0.5);
+}
+
+.volumeSlider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 8px rgba(123, 92, 240, 0.5);
+}
+
+/* ----------------------------------------------------------
+   LAYOUT OPTIONS — layout grid in sub-panel
+   ---------------------------------------------------------- */
+.layoutOptions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.layoutOption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  font-family: var(--font-body);
+  color: rgba(255, 255, 255, 0.8);
+  transition: all var(--duration-fast) var(--easing-smooth);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.layoutOptionActive {
+  border-color: var(--accent-primary);
+  background: rgba(123, 92, 240, 0.1);
+  color: var(--color-white);
+}
+
+.layoutOptionIcon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.layoutOptionLabel {
+  flex: 1;
+  text-align: left;
+}
+
+.layoutOptionCheck {
+  color: var(--accent-primary);
+  font-weight: 700;
+  margin-left: auto;
+}
+
+.layoutList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ----------------------------------------------------------
+   AI PANEL — chat UI within the sheet
+   ---------------------------------------------------------- */
+.aiMessages {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 240px;
+  overflow-y: auto;
+  margin-bottom: 12px;
+  scrollbar-width: none;
+}
+
+.aiMessages::-webkit-scrollbar {
+  display: none;
+}
+
+.aiUserMsg {
+  align-self: flex-end;
+  background: rgba(123, 92, 240, 0.2);
+  border: 1px solid rgba(123, 92, 240, 0.3);
+  border-radius: 12px 12px 2px 12px;
+  padding: 8px 12px;
+  font-size: var(--text-sm);
+  font-family: var(--font-body);
+  color: var(--color-white);
+  max-width: 85%;
+}
+
+.aiAssistantMsg {
+  align-self: flex-start;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px 12px 12px 2px;
+  padding: 8px 12px;
+  font-size: var(--text-sm);
+  font-family: var(--font-body);
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 85%;
+  line-height: 1.5;
+}
+
+.aiInputRow {
+  display: flex;
+  gap: 8px;
+}
+
+.aiInput {
+  flex: 1;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: var(--text-sm);
+  font-family: var(--font-body);
+  color: var(--color-white);
+  outline: none;
+  transition: border-color var(--duration-fast) var(--easing-smooth);
+}
+
+.aiInput::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.aiInput:focus {
+  border-color: var(--accent-primary);
+}
+
+.aiSendBtn {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--accent-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  transition: opacity var(--duration-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.aiSendBtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* ----------------------------------------------------------
+   MOBILE ARC NAV — prev/active/dots/next bar for arc layout
+   ---------------------------------------------------------- */
+.mobileArcNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-controls);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px 28px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+  pointer-events: auto;
+  gap: 12px;
+}
+
+.mobileArcBtn {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 24px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--easing-smooth);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobileArcBtn:active {
+  transform: scale(0.9);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.mobileArcCenter {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.mobileArcIcon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.mobileArcLabel {
+  font-size: var(--text-sm);
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
+}
+
+.mobileArcDots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+  max-width: 180px;
+  margin-top: 4px;
+}
+
+.mobileArcDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background var(--duration-fast), transform var(--duration-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobileArcDotActive {
+  background: var(--accent-primary);
+  transform: scale(1.4);
+  box-shadow: 0 0 6px var(--accent-primary);
+}
+
+/* ----------------------------------------------------------
+   UNIVERSAL MOBILE NAV ICON
+   Used by scattered, orbital, and any future mobile layouts.
+   Intentionally identical token to desktop dockIcon.
+   ---------------------------------------------------------- */
+.scatteredIconMobile {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 8px;
+  min-width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+  color: rgba(255, 255, 255, 0.70);
+  user-select: none;
+}
+
+.scatteredIconMobile:active {
+  transform: scale(0.92);
+}
+
+.scatteredIconMobileActive {
+  background: transparent;
+  border-color: var(--arc-glow);
+  color: white;
+  box-shadow:
+    0 0 0 2px var(--arc-glow),
+    0 0 14px 4px var(--arc-glow),
+    0 0 28px 8px var(--particle-glow);
+  animation: orbitalActiveGlow 3s ease-in-out infinite;
+}
+
+.scatteredIconEmoji {
+  font-size: 20px;
+  line-height: 1;
+  display: block;
+  pointer-events: none;
+}
+
+.scatteredIconLabel {
+  font-size: 9px;
+  font-family: var(--font-body);
+  color: inherit;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+  pointer-events: none;
+}
+
+/* ----------------------------------------------------------
+   ORBITAL ICON MOBILE — active glow indicator
+   ---------------------------------------------------------- */
+.orbitalIconMobile {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 8px;
+  min-width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: box-shadow 200ms ease, border-color 200ms ease;
+  -webkit-tap-highlight-color: transparent;
+  color: rgba(255, 255, 255, 0.70);
+  user-select: none;
+}
+
+.orbitalIconMobileActive {
+  border-color: var(--arc-glow);
+  box-shadow:
+    0 0 0 2px var(--arc-glow),
+    0 0 14px 4px var(--arc-glow),
+    0 0 28px 8px var(--particle-glow);
+  animation: orbitalActiveGlow 3s ease-in-out infinite;
+  color: white;
+}
+
+@keyframes orbitalActiveGlow {
+  0%, 100% {
+    box-shadow:
+      0 0 0 2px var(--arc-glow),
+      0 0 12px 4px var(--arc-glow),
+      0 0 24px 8px var(--particle-glow);
+  }
+  50% {
+    box-shadow:
+      0 0 0 2px var(--arc-glow),
+      0 0 20px 8px var(--arc-glow),
+      0 0 40px 16px var(--particle-glow);
+  }
+}
+
+/* ----------------------------------------------------------
+   REDUCED MOTION OVERRIDES
+   ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .bottomSheet {
+    transition: none;
+  }
+
+  .backdrop {
+    animation: none;
+  }
+
+  .subPanel {
+    animation: none;
+  }
+
+  .dockIcon,
+  .gearButton,
+  .sheetOption,
+  .themeChipCanvas,
+  .ambienceToggle,
+  .layoutOption {
+    transition: none;
+  }
+}

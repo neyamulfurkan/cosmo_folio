@@ -1,0 +1,257 @@
+/* ============================================================
+   FILE 039: src/components/sections/About/About.module.css
+   Layout, photo tilt container, values grid, and fun facts
+   cycling display for the About section.
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   SECTION CONTAINER
+   ---------------------------------------------------------- */
+.aboutContainer {
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ----------------------------------------------------------
+   PHOTO + BIO ROW
+   ---------------------------------------------------------- */
+.photoSection {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+.photoWrapper {
+  width: 140px;
+  height: 140px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 3px var(--accent-primary),
+    0 0 24px var(--particle-glow);
+  transition: transform var(--duration-fast) var(--easing-smooth);
+  cursor: pointer;
+  will-change: transform;
+}
+
+.photoWrapper:hover {
+  box-shadow:
+    0 0 0 3px var(--accent-primary),
+    0 0 36px var(--particle-glow);
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+/* ----------------------------------------------------------
+   STORY TEXT
+   ---------------------------------------------------------- */
+.bioColumn {
+  flex: 1;
+  min-width: 0;
+}
+
+.storyText {
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.storyText p + p {
+  margin-top: var(--space-3);
+}
+
+/* ----------------------------------------------------------
+   SHARED SECTION TITLE
+   ---------------------------------------------------------- */
+.sectionTitle {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  margin-bottom: var(--space-4);
+  color: var(--accent-secondary);
+  font-family: var(--font-display);
+}
+
+/* ----------------------------------------------------------
+   VALUES GRID
+   ---------------------------------------------------------- */
+.valuesSection {
+  margin-top: var(--space-8);
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.valueCard {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  padding: var(--space-4);
+  border-radius: 12px;
+  transition: border-color var(--duration-fast) var(--easing-smooth),
+              background var(--duration-fast) var(--easing-smooth);
+}
+
+.valueCard:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.valueIcon {
+  font-size: 24px;
+  margin-bottom: var(--space-2);
+  line-height: 1;
+}
+
+.valueLabel {
+  font-weight: 600;
+  font-size: var(--text-base);
+  margin-bottom: var(--space-1);
+  color: var(--color-white);
+}
+
+.valueDesc {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+}
+
+/* ----------------------------------------------------------
+   FUN FACTS CYCLING DISPLAY
+   ---------------------------------------------------------- */
+.funFactsSection {
+  margin-top: var(--space-6);
+}
+
+.funFactsContainer {
+  position: relative;
+  height: 48px;
+  overflow: hidden;
+}
+
+.funFact {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  font-size: var(--text-base);
+  color: rgba(255, 255, 255, 0.65);
+  animation: textCycle 15s ease-in-out infinite;
+  font-style: italic;
+  line-height: 1.5;
+  opacity: 0;
+}
+
+/* Stagger each fact so only one shows at a time.
+   15s cycle × n facts — delays are set via inline style
+   in the component (animation-delay: index * 15s / total).
+   The keyframe itself handles visibility windows. */
+
+/* ----------------------------------------------------------
+   RESUME DOWNLOAD BUTTON
+   ---------------------------------------------------------- */
+.resumeBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--glass-bg);
+  border: 1px solid var(--accent-primary);
+  border-radius: 10px;
+  padding: var(--space-3) var(--space-5);
+  color: var(--color-white);
+  text-decoration: none;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  margin-top: var(--space-5);
+  transition:
+    background var(--duration-fast) var(--easing-smooth),
+    box-shadow var(--duration-fast) var(--easing-smooth),
+    transform var(--duration-fast) var(--easing-smooth);
+  cursor: pointer;
+}
+
+.resumeBtn:hover {
+  background: var(--accent-primary);
+  box-shadow: 0 4px 16px rgba(123, 92, 240, 0.4);
+  transform: translateY(-1px);
+}
+
+.resumeBtn:active {
+  transform: translateY(0);
+}
+
+.resumeBtnIcon {
+  font-size: var(--text-base);
+}
+
+.resumeUpdated {
+  font-size: var(--text-xs);
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: var(--space-2);
+}
+
+/* ----------------------------------------------------------
+   EMPTY / LOADING STATES
+   ---------------------------------------------------------- */
+.skeletonPhoto {
+  width: 140px;
+  height: 140px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+.skeletonLine {
+  height: 16px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  animation: shimmer 1.6s ease-in-out infinite;
+  margin-bottom: var(--space-2);
+}
+
+.skeletonLine:last-child {
+  width: 70%;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.8; }
+}
+
+/* ----------------------------------------------------------
+   MOBILE OVERRIDES
+   ---------------------------------------------------------- */
+@media (max-width: 768px) {
+  .aboutContainer {
+    padding: var(--space-5);
+  }
+
+  .photoSection {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-5);
+    text-align: center;
+  }
+
+  .valuesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .resumeBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}

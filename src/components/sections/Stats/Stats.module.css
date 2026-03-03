@@ -1,0 +1,489 @@
+/* ============================================================
+   FILE 049: src/components/sections/Stats/Stats.module.css
+   GitHub heatmap, repo stat counters, and Spotify now-playing
+   card styles for the Stats section.
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   SECTION CONTAINER
+   ---------------------------------------------------------- */
+.statsContainer {
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ----------------------------------------------------------
+   SECTION BLOCKS
+   ---------------------------------------------------------- */
+.githubSection {
+  margin-bottom: var(--space-8);
+}
+
+.spotifySection {
+  margin-bottom: var(--space-8);
+}
+
+.sectionTitle {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  margin-bottom: var(--space-4);
+  color: var(--accent-secondary);
+  font-family: var(--font-display);
+}
+
+/* ----------------------------------------------------------
+   GITHUB HEATMAP CANVAS
+   ---------------------------------------------------------- */
+.heatmapCanvas {
+  width: 100%;
+  border-radius: 8px;
+  display: block;
+}
+
+/* ----------------------------------------------------------
+   REPO STAT COUNTERS
+   ---------------------------------------------------------- */
+.repoStats {
+  display: flex;
+  gap: var(--space-6);
+  margin-top: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.statValue {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--accent-primary);
+  font-family: var(--font-display);
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: var(--text-xs);
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ----------------------------------------------------------
+   GITHUB ERROR / LOADING STATES
+   ---------------------------------------------------------- */
+.githubError {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.4);
+  padding: var(--space-4);
+  text-align: center;
+}
+
+.githubLoading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.skeletonHeatmap {
+  width: 100%;
+  height: 96px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.skeletonStats {
+  display: flex;
+  gap: var(--space-6);
+}
+
+.skeletonStat {
+  width: 64px;
+  height: 40px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.skeletonStat:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.skeletonStat:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* ----------------------------------------------------------
+   SPOTIFY CARD
+   ---------------------------------------------------------- */
+.spotifyCard {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  padding: var(--space-4);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.albumArt {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.albumArtPlaceholder {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.trackInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.trackName {
+  font-weight: 600;
+  font-size: var(--text-base);
+  margin-bottom: var(--space-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.artistName {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spotifyBadge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-xs);
+  color: rgba(255, 255, 255, 0.35);
+  margin-top: var(--space-2);
+}
+
+.spotifyIcon {
+  font-size: 12px;
+}
+
+/* ----------------------------------------------------------
+   NOT PLAYING STATE
+   ---------------------------------------------------------- */
+.notPlaying {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: var(--text-sm);
+}
+
+.notPlayingLabel {
+  font-size: var(--text-xs);
+  color: rgba(255, 255, 255, 0.3);
+  margin-top: var(--space-1);
+}
+
+/* ----------------------------------------------------------
+   EQUALIZER BARS — animated when track is playing
+   ---------------------------------------------------------- */
+.equalizerBars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 20px;
+  margin-top: var(--space-2);
+}
+
+.eqBar {
+  width: 3px;
+  background: var(--accent-primary);
+  border-radius: 1px;
+  transform-origin: bottom;
+  animation: eqBounce 0.8s ease-in-out infinite;
+}
+
+.eqBar:nth-child(1) {
+  animation-delay: 0s;
+  height: 60%;
+}
+
+.eqBar:nth-child(2) {
+  animation-delay: 0.2s;
+  height: 100%;
+}
+
+.eqBar:nth-child(3) {
+  animation-delay: 0.4s;
+  height: 60%;
+}
+
+@keyframes eqBounce {
+  0%,
+  100% {
+    transform: scaleY(0.5);
+  }
+  50% {
+    transform: scaleY(1.5);
+  }
+}
+
+/* ----------------------------------------------------------
+   SPOTIFY LOADING STATE
+   ---------------------------------------------------------- */
+.spotifyLoading {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.skeletonAlbum {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.04);
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.skeletonTrackInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.skeletonTrackName {
+  height: 16px;
+  width: 70%;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.skeletonArtistName {
+  height: 12px;
+  width: 45%;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  animation: shimmer 1.5s ease-in-out infinite;
+  animation-delay: 0.15s;
+}
+
+/* ----------------------------------------------------------
+   SPOTIFY ERROR STATE
+   ---------------------------------------------------------- */
+.spotifyError {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.4);
+  padding: var(--space-4);
+  text-align: center;
+}
+
+/* ----------------------------------------------------------
+   SHARED SHIMMER KEYFRAME
+   ---------------------------------------------------------- */
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* ----------------------------------------------------------
+   ARC NAV — mobile arc layout bottom bar
+   ---------------------------------------------------------- */
+.mobileArcNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px 12px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+  pointer-events: auto;
+  z-index: var(--z-controls);
+  gap: 8px;
+}
+
+.mobileArcBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobileArcCenter {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.mobileArcIcon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.mobileArcLabel {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--font-body);
+  white-space: nowrap;
+}
+
+.mobileArcDots {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 140px;
+}
+
+.mobileArcDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 150ms ease, width 200ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobileArcDotActive {
+  width: 12px;
+  border-radius: 2px;
+  background: var(--accent-primary);
+}
+
+/* ----------------------------------------------------------
+   ORBITAL LAYOUT — mobile
+   ---------------------------------------------------------- */
+.orbitalIconMobile {
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 150ms ease, box-shadow 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.orbitalIconMobileActive {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: var(--arc-glow);
+  box-shadow: 0 0 10px 2px var(--arc-glow);
+}
+
+/* ----------------------------------------------------------
+   SCATTERED LAYOUT — mobile
+   ---------------------------------------------------------- */
+.scatteredIconMobile {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.scatteredIconMobileActive {
+  border-color: var(--arc-glow);
+  background: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 0 8px 1px var(--arc-glow);
+}
+
+/* ----------------------------------------------------------
+   REDUCED MOTION OVERRIDES
+   ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .eqBar {
+    animation: none;
+    height: 60%;
+  }
+
+  .skeletonHeatmap,
+  .skeletonStat,
+  .skeletonAlbum,
+  .skeletonTrackName,
+  .skeletonArtistName {
+    animation: none;
+  }
+}
+
+/* ----------------------------------------------------------
+   MOBILE OVERRIDES
+   ---------------------------------------------------------- */
+@media (max-width: 768px) {
+  .statsContainer {
+    padding: var(--space-5);
+  }
+
+  .repoStats {
+    gap: var(--space-5);
+  }
+
+  .spotifyCard {
+    gap: var(--space-3);
+  }
+
+  .albumArt,
+  .albumArtPlaceholder {
+    width: 52px;
+    height: 52px;
+  }
+}

@@ -1,0 +1,227 @@
+/* ============================================================
+   FILE 063: src/components/details/LabDetail/LabDetail.module.css
+   Styles for the LabDetail expanded view inside Layer 2.
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   CONTAINER
+   ---------------------------------------------------------- */
+.detailContainer {
+  padding: 32px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* ----------------------------------------------------------
+   BACK BUTTON
+   ---------------------------------------------------------- */
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: var(--accent-secondary);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  font-family: var(--font-body);
+  margin-bottom: 20px;
+  padding: 0;
+  transition: opacity var(--duration-fast) var(--easing-smooth);
+}
+
+.backBtn:hover {
+  opacity: 0.75;
+}
+
+/* ----------------------------------------------------------
+   TITLE
+   ---------------------------------------------------------- */
+.labTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+/* ----------------------------------------------------------
+   TAG PILLS
+   ---------------------------------------------------------- */
+.tagPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.tagPill {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 3px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* ----------------------------------------------------------
+   DEMO EMBED
+   ---------------------------------------------------------- */
+.demoContainer {
+  margin: 24px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--glass-border);
+}
+
+.demoIframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.demoPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: var(--text-sm);
+  font-family: var(--font-body);
+  text-align: center;
+  padding: 24px;
+}
+
+/* ----------------------------------------------------------
+   DESCRIPTION
+   ---------------------------------------------------------- */
+.description {
+  font-size: var(--text-base);
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.8);
+  white-space: pre-wrap;
+  margin-bottom: 24px;
+}
+
+/* ----------------------------------------------------------
+   TECHNICAL NOTES
+   ---------------------------------------------------------- */
+.techNotes {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 24px;
+}
+
+.techNotesTitle {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--accent-secondary);
+  font-family: var(--font-display);
+}
+
+.techNotesContent {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.75);
+  white-space: pre-wrap;
+}
+
+/* ----------------------------------------------------------
+   EXTERNAL LINKS ROW
+   ---------------------------------------------------------- */
+.linksRow {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.linkBtn {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: var(--color-white);
+  text-decoration: none;
+  font-size: var(--text-sm);
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--easing-smooth),
+              background var(--duration-fast) var(--easing-smooth);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.linkBtn:hover {
+  border-color: var(--accent-primary);
+  background: rgba(255, 255, 255, 0.09);
+}
+
+/* ----------------------------------------------------------
+   ERROR / NOT FOUND STATE
+   ---------------------------------------------------------- */
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 32px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.4);
+  gap: 12px;
+}
+
+.errorStateIcon {
+  font-size: 2.5rem;
+}
+
+.errorStateText {
+  font-size: var(--text-base);
+}
+
+/* ----------------------------------------------------------
+   MOBILE OVERRIDES
+   ---------------------------------------------------------- */
+@media (max-width: 768px) {
+  .detailContainer {
+    padding: 20px 16px;
+    max-width: 100%;
+  }
+
+  .labTitle {
+    font-size: var(--text-2xl);
+  }
+
+  .linksRow {
+    flex-direction: column;
+  }
+
+  .linkBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ----------------------------------------------------------
+   REDUCED MOTION
+   ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .backBtn,
+  .linkBtn {
+    transition-duration: 0.01ms;
+  }
+}

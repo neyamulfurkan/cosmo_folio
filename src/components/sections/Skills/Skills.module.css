@@ -1,0 +1,154 @@
+/* ============================================================
+   FILE 041: src/components/sections/Skills/Skills.module.css
+   Styles for the Skills constellation canvas section and
+   hover tooltip overlay.
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   SECTION CONTAINER
+   ---------------------------------------------------------- */
+.skillsContainer {
+  padding: var(--space-6);
+  position: relative;
+}
+
+/* ----------------------------------------------------------
+   CANVAS WRAPPER
+   Provides positioning context for the absolute tooltip.
+   ---------------------------------------------------------- */
+.canvasWrapper {
+  width: 100%;
+  position: relative;
+}
+
+/* ----------------------------------------------------------
+   CANVAS ELEMENT
+   display: block removes the inline baseline gap.
+   border-radius clips the canvas corners for a softer look.
+   ---------------------------------------------------------- */
+.canvas {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+}
+
+/* ----------------------------------------------------------
+   HOVER TOOLTIP
+   Absolutely positioned over the canvas at the hovered node's
+   screen coordinates. pointer-events: none keeps it from
+   intercepting the mousemove events the canvas needs.
+   ---------------------------------------------------------- */
+.tooltip {
+  position: absolute;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  padding: 10px 14px;
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: 5;
+  font-size: var(--text-sm);
+  white-space: nowrap;
+  color: var(--color-white);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  /* Offset slightly so the tooltip doesn't sit directly under
+     the cursor and interfere with canvas mousemove detection */
+  transform: translate(12px, -50%);
+}
+
+/* ----------------------------------------------------------
+   TOOLTIP — node name
+   ---------------------------------------------------------- */
+.tooltipName {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+/* ----------------------------------------------------------
+   TOOLTIP — secondary meta line (years · proficiency)
+   ---------------------------------------------------------- */
+.tooltipMeta {
+  font-size: var(--text-xs);
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.4;
+}
+
+/* ----------------------------------------------------------
+   CATEGORY LABEL
+   Rendered on the canvas itself via fillText, but this class
+   is available for any supplementary DOM-level category labels
+   the component may render (e.g., a legend).
+   ---------------------------------------------------------- */
+.categoryLabel {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  color: var(--accent-secondary);
+  font-weight: 600;
+}
+
+/* ----------------------------------------------------------
+   EMPTY STATE
+   Shown when store.skills is an empty array.
+   ---------------------------------------------------------- */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-16) var(--space-8);
+  color: rgba(255, 255, 255, 0.35);
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+.emptyStateIcon {
+  font-size: var(--text-4xl);
+  opacity: 0.4;
+}
+
+/* ----------------------------------------------------------
+   LOADING SKELETON
+   Displayed while content is in flight.
+   ---------------------------------------------------------- */
+.skeleton {
+  width: 100%;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+  position: relative;
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.06) 50%,
+    transparent 100%
+  );
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ----------------------------------------------------------
+   RESPONSIVE — mobile
+   Reduce padding on small viewports.
+   ---------------------------------------------------------- */
+@media (max-width: 768px) {
+  .skillsContainer {
+    padding: var(--space-4);
+  }
+
+  .tooltip {
+    font-size: var(--text-xs);
+    padding: 8px 10px;
+  }
+}

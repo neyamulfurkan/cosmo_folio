@@ -1,0 +1,246 @@
+/* ============================================================
+   FILE 027: src/components/AmbienceCorner/AmbienceCorner.module.css
+   Styles for the ambient audio toggle button, animated sound
+   wave bars, and volume slider panel.
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   CORNER BUTTON — fixed top-right glass circle
+   ---------------------------------------------------------- */
+.cornerButton {
+  position: fixed;
+  top: var(--space-5);
+  right: var(--space-5);
+  z-index: calc(var(--z-controls) + 5);
+  pointer-events: auto;
+
+  width: var(--space-12);
+  height: var(--space-12);
+  border-radius: 50%;
+
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) var(--easing-smooth),
+    box-shadow var(--duration-fast) var(--easing-smooth),
+    transform var(--duration-fast) var(--easing-smooth);
+}
+
+.cornerButton:hover {
+  background: rgba(255, 255, 255, 0.10);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.10),
+    0 0 16px var(--arc-glow);
+  transform: scale(1.05);
+}
+
+.cornerButton:active {
+  transform: scale(0.95);
+}
+
+/* ----------------------------------------------------------
+   SOUND WAVE — three animated bars inside the button
+   ---------------------------------------------------------- */
+.soundWave {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.soundBar {
+  width: 3px;
+  border-radius: 2px;
+  background: var(--accent-primary);
+  transform-origin: center bottom;
+  transition: background var(--duration-fast) var(--easing-smooth);
+}
+
+.soundBar:nth-child(1) {
+  height: 8px;
+}
+
+.soundBar:nth-child(2) {
+  height: 14px;
+}
+
+.soundBar:nth-child(3) {
+  height: 8px;
+}
+
+/* Active state — bars animate when audio is on */
+.soundBarActive:nth-child(1) {
+  animation: soundWaveAnim 0.8s ease-in-out infinite;
+  animation-delay: 0s;
+}
+
+.soundBarActive:nth-child(2) {
+  animation: soundWaveAnim 0.8s ease-in-out infinite;
+  animation-delay: 0.15s;
+}
+
+.soundBarActive:nth-child(3) {
+  animation: soundWaveAnim 0.8s ease-in-out infinite;
+  animation-delay: 0.3s;
+}
+
+@keyframes soundWaveAnim {
+  0%,
+  100% {
+    transform: scaleY(0.5);
+  }
+  50% {
+    transform: scaleY(1.5);
+  }
+}
+
+/* Muted icon — shown when audio is off */
+.muteIcon {
+  width: 20px;
+  height: 20px;
+  color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-base);
+  line-height: 1;
+}
+
+/* ----------------------------------------------------------
+   VOLUME CONTAINER — appears on hover below the button
+   ---------------------------------------------------------- */
+.volumeContainer {
+  position: fixed;
+  top: calc(var(--space-5) + var(--space-12) + var(--space-2));
+  right: var(--space-5);
+  z-index: var(--z-overlay);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+
+  padding: var(--space-3) var(--space-3);
+  border-radius: 12px;
+
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition:
+    opacity var(--duration-fast) var(--easing-smooth),
+    transform var(--duration-fast) var(--easing-smooth);
+}
+
+.volumeContainerVisible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* Volume label */
+.volumeLabel {
+  font-size: var(--text-xs);
+  color: rgba(255, 255, 255, 0.4);
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* ----------------------------------------------------------
+   VOLUME SLIDER — horizontal range input
+   ---------------------------------------------------------- */
+.volumeSlider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 120px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  outline: none;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--easing-smooth);
+}
+
+.volumeSlider:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+/* WebKit thumb */
+.volumeSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  cursor: pointer;
+  box-shadow: 0 0 6px var(--particle-glow);
+  transition:
+    background var(--duration-fast) var(--easing-smooth),
+    transform var(--duration-fast) var(--easing-smooth),
+    box-shadow var(--duration-fast) var(--easing-smooth);
+}
+
+.volumeSlider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 10px var(--particle-glow);
+}
+
+/* Firefox thumb */
+.volumeSlider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent-primary);
+  cursor: pointer;
+  box-shadow: 0 0 6px var(--particle-glow);
+  transition:
+    background var(--duration-fast) var(--easing-smooth),
+    transform var(--duration-fast) var(--easing-smooth);
+}
+
+.volumeSlider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* Firefox track fill */
+.volumeSlider::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ----------------------------------------------------------
+   REDUCED MOTION — collapse all animations
+   ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .soundBarActive:nth-child(1),
+  .soundBarActive:nth-child(2),
+  .soundBarActive:nth-child(3) {
+    animation: none;
+  }
+
+  .volumeContainer {
+    transition: opacity var(--duration-fast) var(--easing-smooth);
+    transform: none;
+  }
+}

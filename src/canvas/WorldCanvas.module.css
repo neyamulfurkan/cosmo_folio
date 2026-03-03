@@ -1,0 +1,163 @@
+/* ============================================================
+   FILE 015: src/canvas/WorldCanvas.module.css
+   Styles the WorldCanvas wrapper div and defines dramatic
+   event animation classes triggered by the particle engine.
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   WRAPPER — full-bleed canvas host
+   Sits at z-world (0) so particle canvases render beneath
+   all other layers. overflow: hidden clips any particles
+   or pseudo-elements that escape the viewport edge.
+   ---------------------------------------------------------- */
+.worldCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: var(--z-world);
+  pointer-events: none;
+}
+
+/* Canvas display sizing is set via inline styles by sizeCanvas() in WorldCanvas.tsx.
+   No CSS rule needed here — the inline styles always win and sizeCanvas handles
+   both the pixel buffer dimensions and the display size correctly. */
+
+/* ----------------------------------------------------------
+   DRAMATIC EVENT — Shooting Star (Space theme)
+   A thin bright streak animates diagonally across the
+   upper portion of the canvas layer.
+   ---------------------------------------------------------- */
+.shootingStarActive::before {
+  content: '';
+  position: absolute;
+  top: 15%;
+  left: -10%;
+  width: 200px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.9) 50%,
+    rgba(180, 140, 255, 0.6) 75%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 6px 1px rgba(255, 255, 255, 0.6),
+    0 0 14px 2px rgba(147, 112, 219, 0.4);
+  animation: shootingStar 1.2s var(--easing-decelerate) forwards;
+  pointer-events: none;
+  transform-origin: left center;
+}
+
+/* ----------------------------------------------------------
+   DRAMATIC EVENT — Light Pulse (Ocean theme)
+   A radial bloom of cyan-teal light expands from a point
+   near the centre of the canvas and fades out.
+   ---------------------------------------------------------- */
+.lightPulseActive::before {
+  content: '';
+  position: absolute;
+  top: 40%;
+  left: 45%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow:
+    0 0 0 0 rgba(64, 224, 208, 0.7),
+    0 0 0 0 rgba(0, 180, 216, 0.4);
+  animation: lightPulse 2s var(--easing-smooth) forwards;
+  pointer-events: none;
+}
+
+/* ----------------------------------------------------------
+   DRAMATIC EVENT — Leaf Drift (Forest theme)
+   A soft green fleck drifts diagonally downward, mimicking
+   a single falling leaf caught by a breeze.
+   ---------------------------------------------------------- */
+.leafDriftActive::before {
+  content: '';
+  position: absolute;
+  top: -4%;
+  left: 55%;
+  width: 8px;
+  height: 8px;
+  border-radius: 0 60% 0 60%;
+  background: rgba(144, 238, 144, 0.55);
+  box-shadow: 0 0 8px 2px rgba(100, 200, 100, 0.3);
+  animation: leafDrift 4s var(--easing-smooth) forwards;
+  pointer-events: none;
+}
+
+/* Second leaf — slightly offset for visual depth */
+.leafDriftActive::after {
+  content: '';
+  position: absolute;
+  top: -6%;
+  left: 38%;
+  width: 6px;
+  height: 6px;
+  border-radius: 0 60% 0 60%;
+  background: rgba(50, 205, 50, 0.4);
+  box-shadow: 0 0 6px 1px rgba(76, 175, 80, 0.25);
+  animation: leafDrift 5.5s 0.6s var(--easing-smooth) forwards;
+  pointer-events: none;
+}
+
+/* ----------------------------------------------------------
+   DRAMATIC EVENT — Spark Burst (Ember theme)
+   A bright orange-white flare erupts from a lower-centre
+   point and scatters upward, simulating an ember pop.
+   ---------------------------------------------------------- */
+.sparkBurstActive::before {
+  content: '';
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 200, 80, 0.95);
+  box-shadow:
+    0 0 10px 4px rgba(255, 120, 30, 0.7),
+    0 0 24px 8px rgba(255, 100, 20, 0.3);
+  animation: sparkBurst 0.8s var(--easing-decelerate) forwards;
+  pointer-events: none;
+  transform-origin: center bottom;
+}
+
+.sparkBurstActive::after {
+  content: '';
+  position: absolute;
+  bottom: 22%;
+  left: 52%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 160, 40, 0.8);
+  box-shadow: 0 0 8px 3px rgba(200, 80, 10, 0.5);
+  animation: sparkBurst 0.65s 0.1s var(--easing-decelerate) forwards;
+  pointer-events: none;
+  transform-origin: center bottom;
+}
+
+/* ----------------------------------------------------------
+   NIGHT MODE MODULATION
+   When --night-mode-active is 1, subtle dimming is applied
+   to the wrapper via a translucent overlay. The actual
+   particle opacity and velocity changes are handled in
+   particleEngine.ts — this layer adds a complementary
+   visual softening to the canvas as a whole.
+   ---------------------------------------------------------- */
+.worldCanvas::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 10, calc(var(--night-mode-active) * 0.12));
+  pointer-events: none;
+  transition: background var(--duration-theme) var(--easing-smooth);
+}

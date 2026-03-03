@@ -1,0 +1,334 @@
+/* ============================================================
+   FILE 057: src/components/sections/Resume/Resume.module.css
+   Resume section — document-style layout with dark theme
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   CONTAINER
+   ---------------------------------------------------------- */
+.resumeContainer {
+  padding: 32px;
+}
+
+/* ----------------------------------------------------------
+   DOWNLOAD BAR
+   ---------------------------------------------------------- */
+.downloadBar {
+  display:         flex;
+  justify-content: space-between;
+  align-items:     center;
+  margin-bottom:   24px;
+}
+
+.updateDate {
+  font-size: var(--text-xs);
+  color:     rgba(255, 255, 255, 0.5);
+}
+
+.downloadBtn {
+  background:      var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border:          1px solid var(--accent-primary);
+  border-radius:   8px;
+  padding:         8px 16px;
+  color:           var(--color-white);
+  text-decoration: none;
+  font-size:       var(--text-sm);
+  font-weight:     500;
+  cursor:          pointer;
+  transition:      background var(--duration-fast) var(--easing-smooth),
+                   color var(--duration-fast) var(--easing-smooth);
+}
+
+.downloadBtn:hover {
+  background: var(--accent-primary);
+  color:      var(--color-white);
+}
+
+/* ----------------------------------------------------------
+   DOCUMENT WRAPPER
+   ---------------------------------------------------------- */
+.resumeDoc {
+  display:        flex;
+  flex-direction: column;
+  gap:            28px;
+}
+
+/* ----------------------------------------------------------
+   HEADER
+   ---------------------------------------------------------- */
+.resumeHeader {
+  text-align:    center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.resumeName {
+  font-family: var(--font-display);
+  font-size:   var(--text-4xl);
+  font-weight: 700;
+  color:       var(--color-white);
+  line-height: 1.1;
+}
+
+.resumeTitle {
+  font-size:   var(--text-xl);
+  color:       var(--accent-secondary);
+  margin-top:  4px;
+}
+
+.resumeContact {
+  font-size:  var(--text-sm);
+  color:      rgba(255, 255, 255, 0.6);
+  margin-top: 8px;
+}
+
+/* ----------------------------------------------------------
+   SECTION HEADER
+   ---------------------------------------------------------- */
+.sectionHeader {
+  font-size:      var(--text-lg);
+  font-weight:    600;
+  color:          var(--accent-primary);
+  border-bottom:  1px solid var(--glass-border);
+  padding-bottom: 8px;
+  margin-bottom:  16px;
+}
+
+/* ----------------------------------------------------------
+   RESUME ENTRY
+   ---------------------------------------------------------- */
+.resumeEntry {
+  margin-bottom: 16px;
+}
+
+.resumeEntry:last-child {
+  margin-bottom: 0;
+}
+
+.entryTitle {
+  font-weight: 600;
+  font-size:   var(--text-base);
+  color:       var(--color-white);
+}
+
+.entryMeta {
+  display:         flex;
+  justify-content: space-between;
+  align-items:     baseline;
+  font-size:       var(--text-sm);
+  color:           rgba(255, 255, 255, 0.6);
+  margin-bottom:   6px;
+  flex-wrap:       wrap;
+  gap:             4px;
+}
+
+.entryDesc {
+  font-size:   var(--text-sm);
+  line-height: 1.6;
+  color:       rgba(255, 255, 255, 0.75);
+  white-space: pre-wrap;
+}
+
+/* ----------------------------------------------------------
+   SKILLS
+   ---------------------------------------------------------- */
+.skillsGrid {
+  display:        flex;
+  flex-direction: column;
+  gap:            12px;
+}
+
+.skillCategory {
+  font-weight:   600;
+  font-size:     var(--text-sm);
+  color:         var(--accent-secondary);
+  margin-bottom: 4px;
+}
+
+.skillItems {
+  display:   flex;
+  flex-wrap: wrap;
+  gap:       6px;
+}
+
+.skillItem {
+  font-size:   var(--text-xs);
+  font-family: var(--font-mono);
+  background:  rgba(255, 255, 255, 0.06);
+  padding:     3px 8px;
+  border-radius: 4px;
+  color:       rgba(255, 255, 255, 0.8);
+}
+
+/* ----------------------------------------------------------
+   PROFICIENCY DOTS
+   ---------------------------------------------------------- */
+.proficiencyDots {
+  display:     inline-flex;
+  gap:         3px;
+  align-items: center;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.profDot {
+  width:         6px;
+  height:        6px;
+  border-radius: 50%;
+  background:    rgba(255, 255, 255, 0.2);
+}
+
+.profDotFilled {
+  background: var(--accent-primary);
+}
+
+/* ----------------------------------------------------------
+   CERTIFICATIONS
+   ---------------------------------------------------------- */
+.certEntry {
+  display:     flex;
+  align-items: center;
+  gap:         10px;
+  margin-bottom: 10px;
+}
+
+.certEntry:last-child {
+  margin-bottom: 0;
+}
+
+.certName {
+  font-weight: 500;
+  font-size:   var(--text-sm);
+  color:       var(--color-white);
+}
+
+.certMeta {
+  font-size: var(--text-xs);
+  color:     rgba(255, 255, 255, 0.5);
+}
+
+.certVerify {
+  font-size:       var(--text-xs);
+  color:           var(--accent-secondary);
+  text-decoration: underline;
+  margin-left:     auto;
+  flex-shrink:     0;
+}
+
+.certVerify:hover {
+  color: var(--accent-primary);
+}
+
+/* ----------------------------------------------------------
+   SOCIAL LINKS ROW
+   ---------------------------------------------------------- */
+.socialRow {
+  display:     flex;
+  flex-wrap:   wrap;
+  gap:         12px;
+  margin-top:  6px;
+  justify-content: center;
+}
+
+.socialLink {
+  font-size:       var(--text-xs);
+  color:           rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition:      color var(--duration-fast) var(--easing-smooth);
+}
+
+.socialLink:hover {
+  color: var(--accent-secondary);
+}
+
+/* ----------------------------------------------------------
+   TECH USED TAGS (experience)
+   ---------------------------------------------------------- */
+.techRow {
+  display:   flex;
+  flex-wrap: wrap;
+  gap:       6px;
+  margin-top: 8px;
+}
+
+.techTag {
+  font-size:     var(--text-xs);
+  font-family:   var(--font-mono);
+  background:    rgba(255, 255, 255, 0.06);
+  padding:       3px 8px;
+  border-radius: 4px;
+  color:         rgba(255, 255, 255, 0.7);
+}
+
+/* ----------------------------------------------------------
+   EMPTY STATE
+   ---------------------------------------------------------- */
+.emptySection {
+  font-size:  var(--text-sm);
+  color:      rgba(255, 255, 255, 0.35);
+  font-style: italic;
+}
+
+/* ----------------------------------------------------------
+   SKELETON / LOADING
+   ---------------------------------------------------------- */
+.skeletonLine {
+  height:        14px;
+  border-radius: 4px;
+  background:    rgba(255, 255, 255, 0.06);
+  animation:     shimmer 1.6s ease-in-out infinite;
+  margin-bottom: 8px;
+  width:         100%;
+}
+
+.skeletonLineShort {
+  width: 40%;
+}
+
+.skeletonLineMid {
+  width: 65%;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.8; }
+}
+
+/* ----------------------------------------------------------
+   RESPONSIVE — mobile
+   ---------------------------------------------------------- */
+@media (max-width: 768px) {
+  .resumeContainer {
+    padding: 20px 16px;
+  }
+
+  .resumeName {
+    font-size: var(--text-3xl);
+  }
+
+  .resumeTitle {
+    font-size: var(--text-lg);
+  }
+
+  .downloadBar {
+    flex-direction: column;
+    align-items:    flex-start;
+    gap:            8px;
+  }
+
+  .entryMeta {
+    flex-direction: column;
+    gap:            2px;
+  }
+}
+
+/* ----------------------------------------------------------
+   REDUCED MOTION
+   ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .skeletonLine {
+    animation: none;
+    opacity:   0.5;
+  }
+}

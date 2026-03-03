@@ -1,0 +1,340 @@
+/* ============================================================
+   FILE 005: src/styles/global.css
+   Global CSS resets, shared keyframe animations, and utility
+   classes. No component-specific styles. No class names that
+   collide with CSS module names.
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   BOX MODEL RESET
+   ---------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ----------------------------------------------------------
+   ROOT & BODY
+   ---------------------------------------------------------- */
+html {
+  height: 100%;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  height: 100%;
+  background-color: var(--world-bg-start);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+body.admin-mode {
+  overflow: auto;
+  background: #f5f5f5;
+  color: #1a1a1a;
+}
+
+#root {
+  height: 100%;
+  isolation: isolate;
+}
+
+/* ----------------------------------------------------------
+   ELEMENT RESETS
+   ---------------------------------------------------------- */
+img,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* ----------------------------------------------------------
+   SCROLLBAR STYLING — webkit
+   ---------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
+
+/* ----------------------------------------------------------
+   UTILITY — screen-reader only
+   ---------------------------------------------------------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ----------------------------------------------------------
+   KEYFRAMES — general purpose
+   ---------------------------------------------------------- */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ----------------------------------------------------------
+   KEYFRAMES — dramatic particle events
+   ---------------------------------------------------------- */
+
+@keyframes shootingStar {
+  0% {
+    opacity: 0;
+    transform: translateX(0) translateY(0) scaleX(0.2);
+  }
+  5% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(300px) translateY(120px) scaleX(1);
+  }
+}
+
+@keyframes lightPulse {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  30% {
+    opacity: 0.6;
+    transform: scale(1.4);
+  }
+  60% {
+    opacity: 0.3;
+    transform: scale(1.8);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.4);
+  }
+}
+
+@keyframes leafDrift {
+  0% {
+    opacity: 0;
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+  20% {
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(60px) translateY(80px) rotate(180deg);
+  }
+}
+
+@keyframes sparkBurst {
+  0% {
+    opacity: 0;
+    transform: scale(0) translate(0, 0);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.2) translate(var(--spark-dx, 30px), var(--spark-dy, -40px));
+  }
+}
+
+/* ----------------------------------------------------------
+   KEYFRAMES — text cycling (subtitle rotation in Home)
+   One item visible at a time. With n items, each item's
+   animation-duration = n * cycleInterval. The visible window
+   is 1/n of the total duration. Stagger via animation-delay.
+   ---------------------------------------------------------- */
+
+@keyframes textCycle {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  8% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  25% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  33% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+/* ----------------------------------------------------------
+   KEYFRAMES — letter assembly (name entrance in Loader / Home)
+   ---------------------------------------------------------- */
+
+@keyframes letterAssemble {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.85);
+    filter: blur(4px);
+  }
+  60% {
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* ----------------------------------------------------------
+   KEYFRAMES — arc navigation entrance
+   ---------------------------------------------------------- */
+
+@keyframes arcGlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ----------------------------------------------------------
+   KEYFRAMES — Layer 2 stage entrance
+   ---------------------------------------------------------- */
+
+@keyframes stageRiseUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 40px));
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* ----------------------------------------------------------
+   REDUCED MOTION — collapse all durations to near-zero
+   Applies universally; component overrides are intentional
+   only if they're also wrapped in this media query.
+   ---------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

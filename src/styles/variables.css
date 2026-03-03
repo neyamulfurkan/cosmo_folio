@@ -1,0 +1,130 @@
+/* ============================================================
+   FILE 004: src/styles/variables.css
+   Design system tokens — single source of truth for all CSS
+   custom properties. Only :root selector permitted in this file.
+   ============================================================ */
+
+:root {
+
+  /* ----------------------------------------------------------
+     TYPOGRAPHY — font families
+     ---------------------------------------------------------- */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+
+  /* ----------------------------------------------------------
+     TYPOGRAPHY — type scale
+     ---------------------------------------------------------- */
+  --text-xs:   0.75rem;    /* 12px */
+  --text-sm:   0.875rem;   /* 14px */
+  --text-base: 1rem;       /* 16px */
+  --text-lg:   1.125rem;   /* 18px */
+  --text-xl:   1.25rem;    /* 20px */
+  --text-2xl:  1.5rem;     /* 24px */
+  --text-3xl:  1.875rem;   /* 30px */
+  --text-4xl:  2.25rem;    /* 36px */
+  --text-5xl:  3rem;       /* 48px */
+  --text-6xl:  3.75rem;    /* 60px */
+
+  /* ----------------------------------------------------------
+     SPACING — 4px base-unit scale
+     ---------------------------------------------------------- */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-7:  28px;
+  --space-8:  32px;
+  --space-9:  36px;
+  --space-10: 40px;
+  --space-11: 44px;
+  --space-12: 48px;
+  --space-13: 52px;
+  --space-14: 56px;
+  --space-15: 60px;
+  --space-16: 64px;
+
+  /* ----------------------------------------------------------
+     COLORS — base palette
+     ---------------------------------------------------------- */
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  --color-gray-100: #f5f5f5;
+  --color-gray-200: #e5e5e5;
+  --color-gray-300: #d4d4d4;
+  --color-gray-400: #a3a3a3;
+  --color-gray-500: #737373;
+  --color-gray-600: #525252;
+  --color-gray-700: #404040;
+  --color-gray-800: #262626;
+  --color-gray-900: #171717;
+
+  /* ----------------------------------------------------------
+     GLASS EFFECT — shared surface treatment
+     ---------------------------------------------------------- */
+  --glass-bg:            rgba(255, 255, 255, 0.06);
+  --glass-border:        rgba(255, 255, 255, 0.12);
+  --glass-blur:          20px;
+  --glass-noise-opacity: 0.03;
+
+  /* ----------------------------------------------------------
+     THEME COLOR TOKENS — defaulting to Space theme
+     Overridden per theme in src/styles/themes.css
+     ---------------------------------------------------------- */
+  --world-bg-start:          #020818;
+  --world-bg-end:            #0d0621;
+  --particle-color-primary:  rgba(255, 255, 255, 0.9);
+  --particle-color-secondary: rgba(147, 112, 219, 0.7);
+  --particle-glow:           rgba(120, 80, 255, 0.5);
+  --accent-primary:          #7b5cf0;
+  --accent-secondary:        #4a9eff;
+  --arc-glow:                rgba(123, 92, 240, 0.6);
+
+  /* ----------------------------------------------------------
+     ANIMATION — durations
+     ---------------------------------------------------------- */
+  --duration-instant: 100ms;
+  --duration-fast:    200ms;
+  --duration-normal:  300ms;
+  --duration-slow:    500ms;
+  --duration-theme:   2000ms;
+
+  /* ----------------------------------------------------------
+     ANIMATION — easing functions
+     ---------------------------------------------------------- */
+  --easing-smooth:     cubic-bezier(0.4, 0, 0.2, 1);
+  --easing-spring:     cubic-bezier(0.34, 1.56, 0.64, 1);
+  --easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
+
+  /* ----------------------------------------------------------
+     Z-INDEX — layer system
+     ---------------------------------------------------------- */
+  --z-world:    0;   /* Layer 1 — canvas particle world       */
+  --z-stage:    10;  /* Layer 2 — frosted glass content panel */
+  --z-detail:   20;  /* Layer 2 expanded — detail pages       */
+  --z-controls: 30;  /* Layer 3 — arc nav and corner controls */
+  --z-overlay:  40;  /* Panels opened from corners / AI       */
+  --z-loader:   50;  /* Entrance loader screen                */
+  --z-modal:    60;  /* Any modal dialogs                     */
+
+  /* ----------------------------------------------------------
+     RESPONSIVE BREAKPOINTS
+     Use with @media (max-width: var(--bp-mobile)) etc.
+     ---------------------------------------------------------- */
+  --bp-mobile:  768px;
+  --bp-tablet:  1024px;
+  --bp-desktop: 1280px;
+
+  /* ----------------------------------------------------------
+     NIGHT MODE — runtime toggle
+     Set to 1 via JS when local hour is between 22 and 6.
+     Consumed via calc() in component CSS to adjust opacity
+     and animation-duration without class changes.
+     ---------------------------------------------------------- */
+  --night-mode-active: 0;
+
+}

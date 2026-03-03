@@ -1,0 +1,165 @@
+/* ============================================================
+   FILE 029: src/components/LayoutCorner/LayoutCorner.module.css
+   Layout switcher corner button and selection panel.
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   CORNER BUTTON — fixed bottom-left trigger
+   ---------------------------------------------------------- */
+.cornerRoot {
+  pointer-events: auto;
+}
+
+.cornerButton {
+  position: fixed;
+  bottom: 80px;
+  left: 20px;
+  z-index: var(--z-controls);
+
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: var(--text-xl);
+
+  transition: all var(--duration-fast) var(--easing-smooth);
+}
+
+.cornerButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08), 0 0 16px var(--arc-glow);
+  transform: scale(1.05);
+}
+
+.cornerButton:active {
+  transform: scale(0.97);
+}
+
+.cornerButtonActive {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--accent-primary);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05), 0 0 12px var(--arc-glow);
+  color: var(--color-white);
+}
+
+/* ----------------------------------------------------------
+   LAYOUT PANEL — floating options list
+   ---------------------------------------------------------- */
+.layoutPanel {
+  position: fixed;
+  bottom: 150px;
+  left: 20px;
+  z-index: var(--z-overlay);
+
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
+
+  padding: 12px;
+  border-radius: 16px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  min-width: 180px;
+
+  animation: panelReveal var(--duration-normal) var(--easing-decelerate) both;
+  transform-origin: bottom left;
+}
+
+@keyframes panelReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ----------------------------------------------------------
+   LAYOUT OPTION — individual selectable row
+   ---------------------------------------------------------- */
+.layoutOption {
+  cursor: pointer;
+  padding: 12px 16px;
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: var(--text-sm);
+  font-family: var(--font-body);
+  color: rgba(255, 255, 255, 0.8);
+
+  border: 1px solid transparent;
+
+  transition: background var(--duration-fast) var(--easing-smooth),
+              color var(--duration-fast) var(--easing-smooth),
+              border-color var(--duration-fast) var(--easing-smooth);
+}
+
+.layoutOption:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-white);
+}
+
+.layoutOptionActive {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-white);
+  font-weight: 500;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.layoutOptionActive:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* ----------------------------------------------------------
+   LAYOUT OPTION ICON — emoji / icon slot
+   ---------------------------------------------------------- */
+.layoutOptionIcon {
+  font-size: var(--text-base);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+}
+
+/* ----------------------------------------------------------
+   LAYOUT OPTION LABEL — display name
+   ---------------------------------------------------------- */
+.layoutOptionLabel {
+  flex: 1;
+  white-space: nowrap;
+}
+
+/* ----------------------------------------------------------
+   ACTIVE INDICATOR — dot on active option
+   ---------------------------------------------------------- */
+.activeIndicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  flex-shrink: 0;
+  box-shadow: 0 0 6px var(--accent-primary);
+}

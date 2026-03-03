@@ -1,0 +1,82 @@
+/* ============================================================
+   FILE 006: src/styles/themes.css
+   Theme override classes — applied to <body> on theme switch.
+   Each class overrides the theme-specific custom properties
+   defined in variables.css. Class names must match exactly
+   as referenced in src/store.ts and canvas code.
+   ============================================================ */
+
+/* Body-level transition for background color morph on theme switch */
+body {
+  transition: background var(--duration-theme) var(--easing-smooth);
+}
+
+/* ----------------------------------------------------------
+   SPACE — default theme (deep cosmic purple/navy)
+   ---------------------------------------------------------- */
+.theme-space {
+  --world-bg-start:           #020818;
+  --world-bg-end:             #0d0621;
+  --particle-color-primary:   rgba(255, 255, 255, 0.9);
+  --particle-color-secondary: rgba(147, 112, 219, 0.7);
+  --particle-glow:            rgba(120, 80, 255, 0.5);
+  --accent-primary:           #7b5cf0;
+  --accent-secondary:         #4a9eff;
+  --arc-glow:                 rgba(123, 92, 240, 0.6);
+}
+
+/* ----------------------------------------------------------
+   OCEAN — deep teal/cyan bioluminescence
+   ---------------------------------------------------------- */
+.theme-ocean {
+  --world-bg-start:           #020d14;
+  --world-bg-end:             #031a2e;
+  --particle-color-primary:   rgba(64, 224, 208, 0.8);
+  --particle-color-secondary: rgba(0, 128, 180, 0.6);
+  --particle-glow:            rgba(64, 224, 208, 0.4);
+  --accent-primary:           #00b4d8;
+  --accent-secondary:         #40e0d0;
+  --arc-glow:                 rgba(0, 180, 216, 0.6);
+}
+
+/* ----------------------------------------------------------
+   FOREST — deep green with firefly light
+   ---------------------------------------------------------- */
+.theme-forest {
+  --world-bg-start:           #020a04;
+  --world-bg-end:             #041208;
+  --particle-color-primary:   rgba(144, 238, 144, 0.6);
+  --particle-color-secondary: rgba(50, 205, 50, 0.4);
+  --particle-glow:            rgba(100, 200, 100, 0.3);
+  --accent-primary:           #4caf50;
+  --accent-secondary:         #8bc34a;
+  --arc-glow:                 rgba(76, 175, 80, 0.6);
+}
+
+/* ----------------------------------------------------------
+   EMBER — dark ash with warm orange fire
+   ---------------------------------------------------------- */
+.theme-ember {
+  --world-bg-start:           #0a0202;
+  --world-bg-end:             #140804;
+  --particle-color-primary:   rgba(255, 100, 20, 0.8);
+  --particle-color-secondary: rgba(200, 50, 10, 0.5);
+  --particle-glow:            rgba(255, 120, 30, 0.4);
+  --accent-primary:           #ff6314;
+  --accent-secondary:         #ff9500;
+  --arc-glow:                 rgba(255, 99, 20, 0.6);
+}
+
+/* ----------------------------------------------------------
+   MINIMAL — pure black with white geometry
+   ---------------------------------------------------------- */
+.theme-minimal {
+  --world-bg-start:           #000000;
+  --world-bg-end:             #050505;
+  --particle-color-primary:   rgba(255, 255, 255, 0.85);
+  --particle-color-secondary: rgba(200, 200, 200, 0.4);
+  --particle-glow:            rgba(255, 255, 255, 0.2);
+  --accent-primary:           #ffffff;
+  --accent-secondary:         #aaaaaa;
+  --arc-glow:                 rgba(255, 255, 255, 0.3);
+}

@@ -1,0 +1,318 @@
+/* ============================================================
+   FILE 059: src/components/details/ProjectDetail/ProjectDetail.module.css
+   CSS module for ProjectDetail layout, hero media, sticky
+   action bar, narrative content sections, and tech stack grid.
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   CONTAINER
+   ---------------------------------------------------------- */
+.detailContainer {
+  padding: 32px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* ----------------------------------------------------------
+   TITLE
+   ---------------------------------------------------------- */
+.projectTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: 24px;
+  line-height: 1.15;
+}
+
+/* ----------------------------------------------------------
+   HERO MEDIA
+   ---------------------------------------------------------- */
+.heroMedia {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 32px;
+  aspect-ratio: 16 / 9;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.heroImg,
+.heroVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ----------------------------------------------------------
+   FLOATING ACTION BAR — sticky below top of scroll area
+   ---------------------------------------------------------- */
+.floatingActions {
+  position: sticky;
+  top: 16px;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--color-white);
+  font-size: var(--text-sm);
+  font-family: var(--font-body);
+  transition:
+    border-color var(--duration-fast) var(--easing-smooth),
+    background var(--duration-fast) var(--easing-smooth),
+    transform var(--duration-fast) var(--easing-smooth);
+  white-space: nowrap;
+}
+
+.actionBtn:hover {
+  border-color: var(--accent-primary);
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Back button gets accent border treatment by default */
+.actionBtnBack {
+  border-color: var(--accent-primary);
+}
+
+.actionBtnBack:hover {
+  background: rgba(123, 92, 240, 0.15);
+}
+
+/* ----------------------------------------------------------
+   NARRATIVE SECTIONS — Problem / Approach / Build / Result
+   ---------------------------------------------------------- */
+.sectionBlock {
+  margin-bottom: 32px;
+}
+
+.sectionTitle {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--accent-secondary);
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
+.sectionContent {
+  font-size: var(--text-base);
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.8);
+  white-space: pre-wrap;
+}
+
+/* ----------------------------------------------------------
+   TECH STACK GRID
+   ---------------------------------------------------------- */
+.techGridTitle {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--accent-secondary);
+  margin-bottom: 16px;
+}
+
+.techGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.techCard {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  padding: 14px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: help;
+  text-align: center;
+  position: relative;
+  transition:
+    border-color var(--duration-fast) var(--easing-smooth),
+    background var(--duration-fast) var(--easing-smooth),
+    transform var(--duration-fast) var(--easing-smooth);
+}
+
+.techCard:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+.techIcon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.techName {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-white);
+}
+
+/* Reason shown as native browser title tooltip via HTML title attr —
+   no extra CSS needed; kept here for potential custom tooltip upgrade */
+.techReason {
+  display: none;
+}
+
+/* ----------------------------------------------------------
+   NAVIGATION FOOTER — sibling project prev/next
+   ---------------------------------------------------------- */
+.navFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--glass-border);
+}
+
+.navBtn {
+  background: transparent;
+  border: none;
+  color: var(--accent-secondary);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  font-family: var(--font-body);
+  padding: 8px;
+  transition: color var(--duration-fast) var(--easing-smooth);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.navBtn:hover {
+  color: var(--color-white);
+}
+
+.navBtnDisabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ----------------------------------------------------------
+   EMPTY / ERROR STATE
+   ---------------------------------------------------------- */
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 64px 32px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.errorStateTitle {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--color-white);
+}
+
+/* ----------------------------------------------------------
+   SKELETON LOADING STATES
+   ---------------------------------------------------------- */
+@keyframes shimmer {
+  0%   { opacity: 0.4; }
+  50%  { opacity: 0.7; }
+  100% { opacity: 0.4; }
+}
+
+.skeletonTitle {
+  height: 44px;
+  width: 70%;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  margin-bottom: 24px;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+.skeletonHero {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  margin-bottom: 32px;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+.skeletonLine {
+  height: 16px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  margin-bottom: 10px;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+.skeletonLineShort {
+  width: 55%;
+}
+
+.skeletonLineMid {
+  width: 80%;
+}
+
+/* ----------------------------------------------------------
+   RESPONSIVE — mobile
+   ---------------------------------------------------------- */
+@media (max-width: 768px) {
+  .detailContainer {
+    padding: 20px 16px;
+  }
+
+  .projectTitle {
+    font-size: var(--text-3xl);
+  }
+
+  .techGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .floatingActions {
+    top: 8px;
+    gap: 8px;
+  }
+
+  .actionBtn {
+    padding: 6px 12px;
+    font-size: var(--text-xs);
+  }
+}
+
+/* ----------------------------------------------------------
+   REDUCED MOTION
+   ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .actionBtn,
+  .techCard,
+  .navBtn {
+    transition-duration: 0.01ms;
+  }
+
+  .skeletonTitle,
+  .skeletonHero,
+  .skeletonLine {
+    animation-duration: 0.01ms;
+  }
+}

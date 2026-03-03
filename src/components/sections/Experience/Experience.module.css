@@ -1,0 +1,256 @@
+/* ============================================================
+   FILE 043: src/components/sections/Experience/Experience.module.css
+   Timeline layout, expandable entry bodies, and tech tags
+   for the Experience section.
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   SECTION WRAPPER
+   ---------------------------------------------------------- */
+.experienceContainer {
+  padding: var(--space-8);
+}
+
+/* ----------------------------------------------------------
+   EMPTY STATE
+   ---------------------------------------------------------- */
+.emptyState {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: var(--text-base);
+  text-align: center;
+  padding: var(--space-10);
+}
+
+/* ----------------------------------------------------------
+   TIMELINE STRUCTURE
+   ---------------------------------------------------------- */
+.timeline {
+  position: relative;
+  padding-left: var(--space-8);
+}
+
+.timelineLine {
+  position: absolute;
+  left: 16px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent-primary), transparent);
+  pointer-events: none;
+}
+
+/* ----------------------------------------------------------
+   INDIVIDUAL ENTRY
+   ---------------------------------------------------------- */
+.entry {
+  position: relative;
+  margin-bottom: var(--space-8);
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.timelineNode {
+  position: absolute;
+  left: -23px; /* aligns to the line at left: 16px from timeline padding-left: 32px */
+  top: 20px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  box-shadow: 0 0 8px var(--particle-glow);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--easing-smooth),
+              box-shadow var(--duration-fast) var(--easing-smooth);
+  z-index: 1;
+}
+
+.entry:hover .timelineNode {
+  transform: scale(1.2);
+  box-shadow: 0 0 14px var(--particle-glow);
+}
+
+/* ----------------------------------------------------------
+   ENTRY HEADER — always visible, click to expand
+   ---------------------------------------------------------- */
+.entryHeader {
+  cursor: pointer;
+  padding-bottom: var(--space-3);
+  user-select: none;
+}
+
+.company {
+  font-weight: 600;
+  color: var(--accent-secondary);
+  font-size: var(--text-base);
+}
+
+.companyLink {
+  color: var(--accent-secondary);
+  text-decoration: none;
+  transition: color var(--duration-fast);
+}
+
+.companyLink:hover {
+  text-decoration: underline;
+  color: var(--accent-primary);
+}
+
+.role {
+  font-size: var(--text-lg);
+  font-weight: 500;
+  margin: 2px 0;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.dates {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 2px;
+}
+
+/* Expand/collapse chevron hint */
+.expandHint {
+  display: inline-block;
+  font-size: var(--text-xs);
+  color: rgba(255, 255, 255, 0.3);
+  margin-left: var(--space-2);
+  transition: transform var(--duration-normal) var(--easing-smooth),
+              color var(--duration-fast);
+}
+
+.entryExpanded .expandHint {
+  transform: rotate(180deg);
+  color: var(--accent-primary);
+}
+
+/* ----------------------------------------------------------
+   ENTRY BODY — collapsible content
+   ---------------------------------------------------------- */
+.entryBody {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 400ms var(--easing-smooth);
+}
+
+.entryBodyExpanded {
+  max-height: 500px;
+}
+
+.description {
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
+  white-space: pre-wrap;
+  margin-bottom: var(--space-3);
+}
+
+/* ----------------------------------------------------------
+   TECH TAGS
+   ---------------------------------------------------------- */
+.techRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.techTag {
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 3px 8px;
+  border-radius: 4px;
+  transition: background var(--duration-fast),
+              border-color var(--duration-fast);
+}
+
+.techTag:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--accent-primary);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ----------------------------------------------------------
+   SKELETON LOADING STATES
+   ---------------------------------------------------------- */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+
+.skeletonEntry {
+  margin-bottom: var(--space-8);
+  padding-left: var(--space-2);
+}
+
+.skeletonLine {
+  height: 14px;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.04) 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  margin-bottom: var(--space-2);
+}
+
+.skeletonLineShort {
+  composes: skeletonLine;
+  width: 40%;
+}
+
+.skeletonLineMid {
+  composes: skeletonLine;
+  width: 65%;
+}
+
+/* ----------------------------------------------------------
+   MOBILE OVERRIDES
+   ---------------------------------------------------------- */
+@media (max-width: 768px) {
+  .experienceContainer {
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .timeline {
+    padding-left: var(--space-6);
+  }
+
+  .timelineNode {
+    left: -19px;
+    width: 12px;
+    height: 12px;
+  }
+
+  .role {
+    font-size: var(--text-base);
+  }
+
+  .entryBodyExpanded {
+    max-height: 600px;
+  }
+}
+
+/* ----------------------------------------------------------
+   REDUCED MOTION
+   ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .entryBody {
+    transition: none;
+  }
+
+  .timelineNode {
+    transition: none;
+  }
+
+  .techTag {
+    transition: none;
+  }
+}

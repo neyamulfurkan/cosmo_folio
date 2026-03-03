@@ -1,0 +1,330 @@
+/* ============================================================
+   FILE 045: src/components/sections/Education/Education.module.css
+   Education section — timeline for degrees + certifications grid
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   CONTAINER
+   ---------------------------------------------------------- */
+.educationContainer {
+  padding: var(--space-8) var(--space-8) var(--space-10);
+}
+
+/* ----------------------------------------------------------
+   TIMELINE — reuses same conventions as Experience.module.css
+   ---------------------------------------------------------- */
+.timeline {
+  position: relative;
+  padding-left: var(--space-8);
+}
+
+.timelineLine {
+  position: absolute;
+  left: 16px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    var(--accent-primary),
+    transparent
+  );
+}
+
+.timelineNode {
+  position: absolute;
+  left: -23px;
+  top: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  box-shadow: 0 0 8px var(--particle-glow);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--easing-smooth),
+              box-shadow var(--duration-fast) var(--easing-smooth);
+}
+
+.timelineNode:hover {
+  transform: scale(1.25);
+  box-shadow: 0 0 14px var(--particle-glow);
+}
+
+/* ----------------------------------------------------------
+   ENTRY — individual education item
+   ---------------------------------------------------------- */
+.entry {
+  position: relative;
+  margin-bottom: var(--space-8);
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entryHeader {
+  cursor: pointer;
+  padding-bottom: var(--space-3);
+  user-select: none;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.entryHeader:hover .institution {
+  color: var(--accent-primary);
+}
+
+.institution {
+  font-weight: 600;
+  font-size: var(--text-base);
+  color: var(--accent-secondary);
+  transition: color var(--duration-fast) var(--easing-smooth);
+}
+
+.degree {
+  font-size: var(--text-lg);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  margin-top: 2px;
+}
+
+.dates {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: var(--space-1);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.expandHint {
+  font-size: var(--text-xs);
+  color: rgba(255, 255, 255, 0.35);
+  margin-top: 4px;
+  transition: transform var(--duration-fast) var(--easing-smooth);
+  display: inline-block;
+}
+
+.expandHintOpen {
+  transform: rotate(180deg);
+}
+
+/* ----------------------------------------------------------
+   COLLAPSIBLE BODY
+   ---------------------------------------------------------- */
+.entryBody {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 400ms var(--easing-smooth);
+}
+
+.entryBodyExpanded {
+  max-height: 400px;
+}
+
+.description {
+  font-size: var(--text-sm);
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.72);
+  white-space: pre-wrap;
+  padding-bottom: var(--space-4);
+}
+
+/* ----------------------------------------------------------
+   CERTIFICATIONS SECTION
+   ---------------------------------------------------------- */
+.certsSection {
+  margin-top: var(--space-8);
+}
+
+.certsSectionTitle {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  margin-bottom: var(--space-4);
+  color: var(--accent-secondary);
+}
+
+.certsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.certCard {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  padding: var(--space-4);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: center;
+  transition: transform var(--duration-normal) var(--easing-smooth),
+              box-shadow var(--duration-normal) var(--easing-smooth),
+              border-color var(--duration-normal) var(--easing-smooth);
+}
+
+.certCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.certBadge {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.certBadgePlaceholder {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-2xl);
+}
+
+.certName {
+  font-weight: 600;
+  font-size: var(--text-base);
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.4;
+}
+
+.certIssuer {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.certDate {
+  font-size: var(--text-xs);
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.verifyLink {
+  font-size: var(--text-xs);
+  color: var(--accent-secondary);
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--easing-smooth);
+  text-underline-offset: 3px;
+}
+
+.verifyLink:hover {
+  color: var(--accent-primary);
+}
+
+/* ----------------------------------------------------------
+   EMPTY STATES
+   ---------------------------------------------------------- */
+.emptyState {
+  text-align: center;
+  padding: var(--space-10) var(--space-6);
+  color: rgba(255, 255, 255, 0.35);
+  font-size: var(--text-sm);
+}
+
+.emptyStateIcon {
+  font-size: var(--text-3xl);
+  margin-bottom: var(--space-3);
+  display: block;
+  opacity: 0.5;
+}
+
+/* ----------------------------------------------------------
+   LOADING SKELETONS
+   ---------------------------------------------------------- */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+
+.skeletonBase {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 25%,
+    rgba(255, 255, 255, 0.09) 50%,
+    rgba(255, 255, 255, 0.04) 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.6s infinite linear;
+  border-radius: 4px;
+}
+
+.skeletonEntry {
+  margin-bottom: var(--space-8);
+  padding-left: var(--space-4);
+}
+
+.skeletonLine {
+  composes: skeletonBase;
+  height: 14px;
+  width: 100%;
+  margin-bottom: var(--space-2);
+}
+
+.skeletonLineShort {
+  composes: skeletonBase;
+  height: 12px;
+  width: 55%;
+  margin-bottom: var(--space-2);
+}
+
+.skeletonLineMid {
+  composes: skeletonBase;
+  height: 12px;
+  width: 75%;
+  margin-bottom: var(--space-2);
+}
+
+.skeletonCertCard {
+  composes: skeletonBase;
+  border-radius: 12px;
+  height: 160px;
+}
+
+/* ----------------------------------------------------------
+   RESPONSIVE — mobile
+   ---------------------------------------------------------- */
+@media (max-width: 768px) {
+  .educationContainer {
+    padding: var(--space-6) var(--space-5) var(--space-8);
+  }
+
+  .certsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .dates {
+    font-size: var(--text-xs);
+  }
+}
+
+/* ----------------------------------------------------------
+   REDUCED MOTION
+   ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .entryBody {
+    transition: none;
+  }
+
+  .certCard {
+    transition: none;
+  }
+
+  .skeletonLine,
+  .skeletonLineShort,
+  .skeletonLineMid,
+  .skeletonCertCard {
+    animation: none;
+  }
+}

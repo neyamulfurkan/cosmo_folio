@@ -1,0 +1,15 @@
+/* ============================================================
+   FILE 033: src/components/Layer3Controls/Layer3Controls.module.css
+   Wrapper for all Layer 3 controls — fixed full-viewport,
+   non-interactive container. Children opt in to pointer events.
+   ============================================================ */
+
+.controlsWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: var(--z-controls);
+}

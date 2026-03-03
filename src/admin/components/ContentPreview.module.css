@@ -1,0 +1,262 @@
+/* src/admin/components/ContentPreview.module.css */
+
+/* ─── Overlay backdrop ───────────────────────────────────────────────────────── */
+
+.previewOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: overlayFadeIn 200ms ease forwards;
+}
+
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ─── Glass panel container ──────────────────────────────────────────────────── */
+
+.previewContainer {
+  position: relative;
+  width: 860px;
+  height: 720px;
+  border-radius: 24px;
+  overflow: hidden;
+
+  /* Mirror Layer 2's exact glass treatment */
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+
+  display: flex;
+  flex-direction: column;
+
+  animation: containerSlideUp 250ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes containerSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ─── Noise texture overlay (matches Layer 2) ────────────────────────────────── */
+
+.noiseOverlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  z-index: 1;
+}
+
+/* ─── Preview label pill ─────────────────────────────────────────────────────── */
+
+.previewLabel {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+
+  background: rgba(0, 0, 0, 0.5);
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  /* Prevent text selection on the label */
+  user-select: none;
+  white-space: nowrap;
+}
+
+.previewLabelDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4caf50;
+  flex-shrink: 0;
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* ─── Close button ───────────────────────────────────────────────────────────── */
+
+.closeBtn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  line-height: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  transition:
+    background 150ms ease,
+    color 150ms ease,
+    border-color 150ms ease,
+    transform 150ms ease;
+}
+
+.closeBtn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.95);
+  border-color: rgba(255, 255, 255, 0.24);
+  transform: scale(1.08);
+}
+
+.closeBtn:active {
+  transform: scale(0.95);
+}
+
+.closeBtn:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+/* ─── Scrollable content area ────────────────────────────────────────────────── */
+
+.previewScrollArea {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  z-index: 2;
+
+  /* Top padding creates space beneath the label pill and close button */
+  padding-top: 52px;
+}
+
+/* Custom scrollbar — matches Layer 2 aesthetic */
+.previewScrollArea::-webkit-scrollbar {
+  width: 4px;
+}
+
+.previewScrollArea::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.previewScrollArea::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+}
+
+.previewScrollArea::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+/* Firefox */
+.previewScrollArea {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+/* ─── Section loading fallback ───────────────────────────────────────────────── */
+
+.sectionFallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  height: 240px;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.sectionFallbackSpinner {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-top-color: rgba(255, 255, 255, 0.5);
+  animation: spin 700ms linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.sectionFallbackText {
+  font-size: 13px;
+  letter-spacing: 0.03em;
+}
+
+/* ─── Responsive — narrow viewports ─────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .previewContainer {
+    width: calc(100vw - 32px);
+    height: calc(100vh - 48px);
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .previewContainer {
+    width: 100vw;
+    height: 100dvh;
+    border-radius: 0;
+  }
+
+  .previewOverlay {
+    align-items: flex-end;
+  }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .previewOverlay,
+  .previewContainer,
+  .previewLabelDot {
+    animation: none;
+  }
+
+  .closeBtn {
+    transition: none;
+  }
+}
