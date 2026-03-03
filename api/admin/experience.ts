@@ -6,7 +6,7 @@ const AUTHORIZED_PARTIES = [
   'http://localhost:5173',
   ...(process.env.VITE_APP_URL ? [process.env.VITE_APP_URL] : []),
 ];
-import { query } from '../db';
+import { query } from '../db.js';
 
 const verifyClerkToken = async (req: VercelRequest): Promise<boolean> => {
   try {
