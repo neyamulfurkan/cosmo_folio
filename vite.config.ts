@@ -23,20 +23,22 @@ export default defineConfig({
   },
 
   optimizeDeps: {
-    include: ['@clerk/react', '@clerk/shared'],
+    // Updated to the new package name to prevent "Dependency not found" errors
+    include: ['@clerk/clerk-react'],
     force: true,
   },
 
   build: {
     outDir: 'dist',
     commonjsOptions: {
-      include: [/@clerk\/shared/, /@clerk\/react/, /node_modules/],
+      // Updated regex to include the new package name
+      include: [/@clerk\/clerk-react/, /node_modules/],
       transformMixedEsModules: true,
     },
     rollupOptions: {
       output: {
         manualChunks: (id: string) => {
-          // Clerk chunk — keep all clerk packages together to avoid ESM split issues
+          // Clerk chunk — updated path detection for the new package
           if (id.includes('node_modules/@clerk/')) {
             return 'clerk'
           }

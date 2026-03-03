@@ -10,8 +10,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@clerk/backend": "^2.33.0",
-    "@clerk/react": "^5.54.0",
+    "@clerk/clerk-react": "^5.0.0",
+    "@clerk/backend": "^1.24.1",
     "@neondatabase/serverless": "^0.10.4",
     "@types/highlight.js": "^9.12.4",
     "cloudinary": "^2.5.1",
@@ -27,7 +27,6 @@
     "@types/react-dom": "^18.3.1",
     "@vercel/node": "^5.6.9",
     "@vitejs/plugin-react": "^4.3.4",
-    "patch-package": "^8.0.1",
     "typescript": "^5.6.3",
     "vite": "^5.4.11"
   }

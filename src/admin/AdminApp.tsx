@@ -1,7 +1,7 @@
 // src/admin/AdminApp.tsx
 
 import { useState, useEffect, lazy, Suspense } from 'react';
-import { ClerkProvider, SignedIn, SignedOut, useSignIn } from '@clerk/react';
+import { ClerkProvider, SignedIn, SignedOut, useSignIn } from '@clerk/clerk-react';
 import styles from './AdminApp.module.css';
 
 // ─── Lazy-loaded admin section components ────────────────────────────────────

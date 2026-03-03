@@ -1,7 +1,7 @@
 // src/admin/sections/SkillsAdmin.tsx
 
 import { useState, useEffect, useCallback } from 'react';
-import { useAuth } from '@clerk/react';
+import { useAuth } from '@clerk/clerk-react';
 import type { Skill } from '../../types';
 
 type SkillFormData = {

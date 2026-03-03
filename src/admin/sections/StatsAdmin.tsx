@@ -1,7 +1,7 @@
 // src/admin/sections/StatsAdmin.tsx
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { useAuth } from '@clerk/react';
+import { useAuth } from '@clerk/clerk-react';
 import styles from './ProjectsAdmin.module.css';
 
 // ─── Types ────────────────────────────────────────────────────────────────────

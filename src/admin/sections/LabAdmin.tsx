@@ -1,7 +1,7 @@
 // src/admin/sections/LabAdmin.tsx
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { useAuth } from '@clerk/react';
+import { useAuth } from '@clerk/clerk-react';
 import type { LabItem } from '../../types';
 import styles from './ProjectsAdmin.module.css';
 

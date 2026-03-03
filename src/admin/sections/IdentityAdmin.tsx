@@ -1,7 +1,7 @@
 // src/admin/sections/IdentityAdmin.tsx
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { useAuth } from '@clerk/react';
+import { useAuth } from '@clerk/clerk-react';
 import type { Identity, AvailabilityStatus } from '../../types';
 import styles from './IdentityAdmin.module.css';
 

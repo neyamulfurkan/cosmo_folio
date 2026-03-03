@@ -1,7 +1,7 @@
 // src/admin/sections/AchievementsAdmin.tsx
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { useAuth } from '@clerk/react';
+import { useAuth } from '@clerk/clerk-react';
 import type { Achievement } from '../../types';
 import styles from './ProjectsAdmin.module.css';
 

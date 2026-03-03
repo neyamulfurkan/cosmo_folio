@@ -1,7 +1,7 @@
 // src/admin/components/AdminSidebar.tsx
 
 import { useEffect, useState, useCallback } from 'react';
-import { useAuth, SignOutButton } from '@clerk/react';
+import { useAuth, SignOutButton } from '@clerk/clerk-react';
 import styles from './AdminSidebar.module.css';
 
 // ─── Types ───────────────────────────────────────────────────────────────────

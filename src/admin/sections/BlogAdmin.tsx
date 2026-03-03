@@ -1,7 +1,7 @@
 // src/admin/sections/BlogAdmin.tsx
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { useAuth } from '@clerk/react';
+import { useAuth } from '@clerk/clerk-react';
 import type { BlogPost } from '../../types';
 import styles from './ProjectsAdmin.module.css';
 

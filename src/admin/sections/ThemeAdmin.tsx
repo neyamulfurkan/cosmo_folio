@@ -1,7 +1,7 @@
 // src/admin/sections/ThemeAdmin.tsx
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { useAuth } from '@clerk/react';
+import { useAuth } from '@clerk/clerk-react';
 import type { ThemeName } from '../../types';
 import styles from './ThemeAdmin.module.css';
 

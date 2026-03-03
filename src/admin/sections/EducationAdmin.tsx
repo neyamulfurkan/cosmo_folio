@@ -1,7 +1,7 @@
 // src/admin/sections/EducationAdmin.tsx
 
 import { useState, useEffect, useCallback } from 'react';
-import { useAuth } from '@clerk/react';
+import { useAuth } from '@clerk/clerk-react';
 import type { Education, Certification } from '../../types';
 
 type ActiveTab = 'education' | 'certifications';

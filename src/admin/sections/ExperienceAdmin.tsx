@@ -1,7 +1,7 @@
 // src/admin/sections/ExperienceAdmin.tsx
 
 import { useState, useEffect, useCallback } from 'react';
-import { useAuth } from '@clerk/react';
+import { useAuth } from '@clerk/clerk-react';
 import { Experience } from '../../types';
 
 type ViewMode = 'list' | 'edit' | 'new';
