@@ -78,7 +78,7 @@ const getSignedUploadOptions = async (
   folder: string,
   token: string
 ): Promise<Record<string, unknown>> => {
-  const res = await fetch('/api/admin/upload-signature', {
+  const res = await fetch('/api/admin/misc?resource=upload-signature', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -297,7 +297,7 @@ const SiteSettingsAdmin = (): JSX.Element => {
   // ── Fetch site settings on mount ──────────────────────────────────────────
   const fetchSettings = useCallback(async (): Promise<void> => {
     try {
-      const res = await fetch('/api/admin/stats');
+      const res = await fetch('/api/admin/misc?resource=stats');
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const raw = (await res.json()) as Record<string, unknown>;
 
@@ -345,7 +345,7 @@ const SiteSettingsAdmin = (): JSX.Element => {
     setSavingKey(key);
     try {
       const token = await getToken();
-      const res = await fetch('/api/admin/stats', {
+      const res = await fetch('/api/admin/misc?resource=stats', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

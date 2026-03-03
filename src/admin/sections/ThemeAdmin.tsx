@@ -324,7 +324,7 @@ const ThemeAdmin = (): JSX.Element => {
   // ── Fetch current default_theme from site_settings ────────────────────────
   const fetchDefaultTheme = useCallback(async (): Promise<void> => {
     try {
-      const res = await fetch('/api/admin/stats');
+      const res = await fetch('/api/admin/misc?resource=stats');
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const raw = (await res.json()) as Record<string, unknown>;
 
@@ -360,7 +360,7 @@ const ThemeAdmin = (): JSX.Element => {
     setSaving(true);
     try {
       const token = await getToken();
-      const res = await fetch('/api/admin/stats', {
+      const res = await fetch('/api/admin/misc?resource=stats', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -329,7 +329,7 @@ const MessagesAdmin = (): JSX.Element => {
     async (silent = false): Promise<void> => {
       try {
         const token = await getToken();
-        const res = await fetch('/api/admin/messages', {
+        const res = await fetch('/api/admin/misc?resource=messages', {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -380,7 +380,7 @@ const MessagesAdmin = (): JSX.Element => {
   const markRead = async (id: string): Promise<void> => {
     try {
       const token = await getToken();
-      const res = await fetch(`/api/admin/messages?id=${id}`, {
+      const res = await fetch(`/api/admin/misc?resource=messages?id=${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -403,7 +403,7 @@ const MessagesAdmin = (): JSX.Element => {
     if (!deletingId) return;
     try {
       const token = await getToken();
-      const res = await fetch(`/api/admin/messages?id=${deletingId}`, {
+      const res = await fetch(`/api/admin/misc?resource=messages?id=${deletingId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -432,7 +432,7 @@ const MessagesAdmin = (): JSX.Element => {
       const token = await getToken();
       await Promise.all(
         unread.map((m) =>
-          fetch(`/api/admin/messages?id=${m.id}`, {
+          fetch(`/api/admin/misc?resource=messages?id=${m.id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',

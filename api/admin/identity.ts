@@ -15,10 +15,8 @@ async function verifyClerkToken(req: VercelRequest): Promise<boolean> {
     const authHeader = req.headers.authorization;
     if (!authHeader?.startsWith('Bearer ')) return false;
     const token = authHeader.slice(7);
-    await verifyToken(token, {
-      secretKey: process.env.CLERK_SECRET_KEY ?? '',
-      authorizedParties: AUTHORIZED_PARTIES,
-      skipJwtSignatureValidation: process.env.NODE_ENV !== 'production',
+await verifyToken(token, {
+      secretKey: process.env.CLERK_SECRET_KEY,
     });
     return true;
   } catch (e) {

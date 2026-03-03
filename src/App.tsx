@@ -66,7 +66,7 @@ const App = (): JSX.Element => {
 
     const fetchMaintenanceMode = async (): Promise<void> => {
       try {
-        const res = await fetch('/api/admin/stats');
+        const res = await fetch('/api/admin/misc?resource=stats');
         if (!res.ok) return;
         const data = await res.json() as Record<string, unknown>;
         const raw = data['maintenance_mode'];

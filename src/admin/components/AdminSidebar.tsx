@@ -46,7 +46,7 @@ const AdminSidebar = ({ activeSection, onNavigate }: AdminSidebarProps): JSX.Ele
       const token = await getToken();
       if (!token) return;
 
-      const res = await fetch('/api/admin/messages', {
+      const res = await fetch('/api/admin/misc?resource=messages', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
