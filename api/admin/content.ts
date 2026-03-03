@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { verifyToken } from '@clerk/backend';
-import { query } from '../../src/lib/db';
+import { query } from '../db';
 
 async function verifyClerkToken(req: VercelRequest): Promise<boolean> {
   try {

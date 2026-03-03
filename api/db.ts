@@ -1,4 +1,4 @@
-import { Pool, neon } from '@neondatabase/serverless';
+import { Pool } from '@neondatabase/serverless';
 import type { QueryResult, QueryResultRow } from 'pg';
 
 const connectionString = process.env.NEON_DATABASE_URL;
@@ -6,7 +6,7 @@ if (!connectionString) {
   throw new Error('NEON_DATABASE_URL is not defined');
 }
 
-const pool = new Pool({ 
+const pool = new Pool({
   connectionString,
   ssl: true,
   max: 1,
