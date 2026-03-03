@@ -254,7 +254,7 @@ const LabAdmin = (): JSX.Element => {
   const fetchItems = useCallback(async (): Promise<void> => {
     try {
       const token = await getToken();
-      const res = await fetch('/api/admin/lab?admin=true', {
+      const res = await fetch('/api/admin/content?resource=lab?admin=true', {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -349,8 +349,8 @@ const LabAdmin = (): JSX.Element => {
       const isEditing = viewMode === 'edit' && editingId !== null;
 
       const url = isEditing
-        ? `/api/admin/lab?id=${editingId}`
-        : '/api/admin/lab';
+        ? `/api/admin/content?resource=lab?id=${editingId}`
+        : '/api/admin/content?resource=lab';
       const method = isEditing ? 'PUT' : 'POST';
 
       const res = await fetch(url, {
@@ -401,7 +401,7 @@ const LabAdmin = (): JSX.Element => {
   const handleTogglePublished = async (item: LabItem): Promise<void> => {
     try {
       const token = await getToken();
-      const res = await fetch(`/api/admin/lab?id=${item.id}`, {
+      const res = await fetch(`/api/admin/content?resource=lab?id=${item.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -439,7 +439,7 @@ const LabAdmin = (): JSX.Element => {
     if (!deletingId) return;
     try {
       const token = await getToken();
-      const res = await fetch(`/api/admin/lab?id=${deletingId}`, {
+      const res = await fetch(`/api/admin/content?resource=lab?id=${deletingId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

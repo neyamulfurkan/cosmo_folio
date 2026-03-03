@@ -224,7 +224,7 @@ const AchievementsAdmin = (): JSX.Element => {
   const fetchAchievements = useCallback(async (): Promise<void> => {
     try {
       const token = await getToken();
-      const res = await fetch('/api/admin/achievements', {
+      const res = await fetch('/api/admin/content?resource=achievements', {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -305,8 +305,8 @@ const AchievementsAdmin = (): JSX.Element => {
       const isEditing = viewMode === 'edit' && editingId !== null;
 
       const url = isEditing
-        ? `/api/admin/achievements?id=${editingId}`
-        : '/api/admin/achievements';
+        ? `/api/admin/content?resource=achievements?id=${editingId}`
+        : '/api/admin/content?resource=achievements';
       const method = isEditing ? 'PUT' : 'POST';
 
       const res = await fetch(url, {
@@ -359,7 +359,7 @@ const AchievementsAdmin = (): JSX.Element => {
     if (!deletingId) return;
     try {
       const token = await getToken();
-      const res = await fetch(`/api/admin/achievements?id=${deletingId}`, {
+      const res = await fetch(`/api/admin/content?resource=achievements?id=${deletingId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
