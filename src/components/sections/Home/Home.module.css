@@ -486,7 +486,7 @@
   }
 
   .nameDisplay {
-    font-size: clamp(1.8rem, 10vw, 2.5rem);
+    font-size: clamp(1.2rem, 6.5vw, 1.8rem);
   }
 
   .subtitleCycle {

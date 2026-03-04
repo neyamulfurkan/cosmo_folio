@@ -204,10 +204,12 @@
 @media (max-width: 768px) {
   .stage {
     width: 92vw;
-    height: 70vh;
+    height: calc(100svh - 160px);
     min-height: 60vh;
-    max-height: calc(100svh - 120px);
-    top: 46%;
+    max-height: calc(100svh - 160px);
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin-bottom: 0;
   }
 
   .detailExpanded {
