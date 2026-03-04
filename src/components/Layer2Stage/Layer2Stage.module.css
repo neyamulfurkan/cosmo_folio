@@ -205,24 +205,25 @@
   .stage {
     width: 92vw;
     height: calc(100svh - 160px);
-    min-height: 60vh;
-    max-height: calc(100svh - 160px);
+    min-height: unset;
+    max-height: unset;
     top: 50%;
     transform: translate(-50%, -50%);
-    margin-bottom: 0;
   }
 
   .detailExpanded {
     width: 100vw;
-    height: 100vh;
-    max-height: 100vh;
+    height: 100svh;
+    max-height: 100svh;
     top: 50%;
+    transform: translate(-50%, -50%);
     border-radius: 0;
     clip-path: inset(0 0 0 0 round 0px);
   }
 
   .scrollContainer {
     height: 100%;
-    max-height: calc(100svh - 120px);
+    max-height: 100%;
+    overflow-y: auto;
   }
 }
