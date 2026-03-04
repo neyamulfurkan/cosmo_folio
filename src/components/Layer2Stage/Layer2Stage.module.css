@@ -204,10 +204,10 @@
 @media (max-width: 768px) {
   .stage {
     width: 92vw;
-    height: calc(100svh - 160px);
+    height: calc(100svh - 220px);
     min-height: unset;
     max-height: unset;
-    top: 50%;
+    top: calc(50% - 30px);
     transform: translate(-50%, -50%);
   }
 
